@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<Doctor>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -11,5 +13,8 @@
     @User.Claims.ElementAt(0).Value @User.Claims.ElementAt(1).Value
     <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Exit</a>
 }
-                  
-
+       
+@foreach(var a in Model)
+{
+    @a.Name;
+}

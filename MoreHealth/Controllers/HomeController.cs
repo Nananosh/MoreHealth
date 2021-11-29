@@ -12,15 +12,17 @@ namespace MoreHealth.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationContext db;
+        public HomeController(ILogger<HomeController> logger, ApplicationContext context)
         {
             _logger = logger;
+            db = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Doctor> doctors = db.Doctor;
+            return View(doctors);
         }
 
         public IActionResult Privacy()
