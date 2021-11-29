@@ -1,0 +1,80 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="form-group col-md-4">
+    <label for="inputState">Отделение</label>
+    @*<select id="inputState" class="form-control">
+            @foreach (var a in ViewBag.DepartmentList)
+            {
+                <option value="@a.Id">@a.DepartmentName</option>
+            }
+        </select>*@
+    @Html.DropDownList("Department", ViewBag.DepartmentList as SelectList, new { id = "department", @class = "form-control" })
+</div>
+
+<div class="form-group col-md-4">
+    <label for="inputState">Специализация</label>
+    @*<select id="inputState" class="form-control">
+        @foreach (var a in ViewBag.SpecialList)
+        {
+            <option value="@a.Id">@a.SpecializationName</option>
+        }
+    </select>*@
+    @Html.DropDownList("Specializaton", ViewBag.SpecialList as SelectList, new { id = "specialization", @class="form-control"})
+</div>
+
+<div class="form-group col-md-4">
+    <label for="inputState">Врач</label>
+    @*<select id="inputState" class="form-control">
+            @foreach (var a in ViewBag.SpecialList)
+            {
+                <option value="@a.Id">@a.SpecializationName</option>
+            }
+        </select>*@
+    @Html.DropDownList("Doctors", ViewBag.DoctorList as SelectList, new { id = "doctors", @class = "form-control" })
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+    $(function () {
+
+        $('#department').change(function()
+        {
+            var id = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetSpecializatons")/' + id,
+                success: function (data) {
+
+                    if (data) {
+                        $('#specialization').replaceWith(data);
+                    } else {
+                        $('#specialization').replaceWith();
+                    }
+                }
+            });
+        });
+
+        $('#specialization').onchange(function()
+        {
+            console.log("Change!")
+            var id = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetDoctors")/' + id,
+                success: function (data) {
+
+                    if (data) {
+                        $('#doctors').replaceWith(data);
+                    } else {
+                        $('#doctors').remove();
+                    }
+                }
+            });
+        });
+    })
+    </script>
+}
