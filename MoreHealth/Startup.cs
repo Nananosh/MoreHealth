@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MoreHealth.Business.Interfaces;
+using MoreHealth.Business.Services;
 using MoreHealth.Models;
 
 namespace MoreHealth
@@ -27,6 +29,9 @@ namespace MoreHealth
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddScoped<IFeedBackService, FeedBackService>();
+
             services.AddDbContext<ApplicationContext>(
                 options =>
                     options.UseSqlServer(
