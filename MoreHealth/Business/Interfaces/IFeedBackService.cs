@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using System.Linq;
 using MoreHealth.Models;
 
 namespace MoreHealth.Business.Interfaces
@@ -14,6 +14,6 @@ namespace MoreHealth.Business.Interfaces
 
         IEnumerable<Specialization> GetSpecializationsById(ApplicationContext db, int id);
 
-        IEnumerable<Doctor> GetDoctorsBySpecializaton(ApplicationContext db, int id);
+        IQueryable GetDoctorsBySpecialization(ApplicationContext db, int id);
     }
 }

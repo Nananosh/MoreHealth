@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using MoreHealth.Business.Interfaces;
 using MoreHealth.Business.Services;
 using MoreHealth.Models;
+using MoreHealth.ViewModels.Mappings;
 
 namespace MoreHealth
 {
@@ -28,6 +30,14 @@ namespace MoreHealth
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // var mappingConfig = new MapperConfiguration(mc =>
+            // {
+            //     mc.AddProfile(new UserMappingProfile());
+            // });
+            // IMapper mapper = mappingConfig.CreateMapper();
+            // services.AddSingleton(mapper);
+            
+            services.AddAutoMapper(typeof(UserMappingProfile));
             services.AddControllersWithViews();
 
             services.AddScoped<IFeedBackService, FeedBackService>();

@@ -1,80 +1,91 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<!DOCTYPE html>
+<html>
+<body>
+<div id="example">
+    <div class="k-content">
+        <h4>Отделение:</h4>
+        <input id="departments" style="width: 100%;" />
 
-<div class="form-group col-md-4">
-    <label for="inputState">Отделение</label>
-    @*<select id="inputState" class="form-control">
-            @foreach (var a in ViewBag.DepartmentList)
-            {
-                <option value="@a.Id">@a.DepartmentName</option>
-            }
-        </select>*@
-    @Html.DropDownList("Department", ViewBag.DepartmentList as SelectList, new { id = "department", @class = "form-control" })
-</div>
+        <h4 style="margin-top: 2em;">Специализация:</h4>
+        <input id="specializations" disabled="disabled" style="width: 100%;" />
 
-<div class="form-group col-md-4">
-    <label for="inputState">Специализация</label>
-    @*<select id="inputState" class="form-control">
-        @foreach (var a in ViewBag.SpecialList)
-        {
-            <option value="@a.Id">@a.SpecializationName</option>
-        }
-    </select>*@
-    @Html.DropDownList("Specializaton", ViewBag.SpecialList as SelectList, new { id = "specialization", @class="form-control"})
-</div>
+        <h4 style="margin-top: 2em;">Врачи:</h4>
+        <input id="doctors" disabled="disabled" style="width: 100%;" />
+        <button id="primaryTextButton" class="k-primary">Отправить</button>
 
-<div class="form-group col-md-4">
-    <label for="inputState">Врач</label>
-    @*<select id="inputState" class="form-control">
-            @foreach (var a in ViewBag.SpecialList)
-            {
-                <option value="@a.Id">@a.SpecializationName</option>
-            }
-        </select>*@
-    @Html.DropDownList("Doctors", ViewBag.DoctorList as SelectList, new { id = "doctors", @class = "form-control" })
-</div>
-
-@section scripts{
-    <script type="text/javascript">
-    $(function () {
-
-        $('#department').change(function()
-        {
-            var id = $(this).val();
-            $.ajax({
-                type: 'GET',
-                url: '@Url.Action("GetSpecializatons")/' + id,
-                success: function (data) {
-
-                    if (data) {
-                        $('#specialization').replaceWith(data);
-                    } else {
-                        $('#specialization').replaceWith();
+        <script>
+            $(document).ready(function() {
+                var categories = $("#departments").kendoDropDownList({
+                    dataTextField: "departmentName",
+                    dataValueField: "id",
+                    optionLabel: "Выберите отделение...",
+                    height: 310,
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: "/Feedback/GetAllDepartment"
+                            }
+                        }
                     }
-                }
-            });
-        });
-
-        $('#specialization').onchange(function()
-        {
-            console.log("Change!")
-            var id = $(this).val();
-            $.ajax({
-                type: 'GET',
-                url: '@Url.Action("GetDoctors")/' + id,
-                success: function (data) {
-
-                    if (data) {
-                        $('#doctors').replaceWith(data);
-                    } else {
-                        $('#doctors').remove();
+                }).data("kendoDropDownList");
+            
+                var products = $("#specializations").kendoDropDownList({
+                    autoBind: false,
+                    cascadeFrom: "departments",
+                    optionLabel: "Выберите специальность...",
+                    dataTextField: "specializationName",
+                    dataValueField: "id",
+                    change: onChange,
+                    dataSource: {
+                        serverFiltering: true,
+                        transport: {
+                            read: {
+                                url: "/Feedback/GetSpecializationsById",
+                                data: function() {
+                                    return {
+                                        id: $("#departments").data("kendoDropDownList").value()
+                                    };
+                                }
+                            }
+                        }
                     }
-                }
+                }).data("kendoDropDownList");
+            
+                $("#doctors").kendoDropDownList({
+                    dataTextField: "name",
+                    dataValueField: "id",
+                    cascadeFrom: "specializations",
+                    optionLabel: "Выберите врача...",
+                    autoBind: false,
+                    dataSource: {
+                        serverFiltering: true,
+                        transport: {
+                            read: {
+                                url: "/Feedback/GetDoctorsBySpecialization",
+                                data: function() {
+                                    return {
+                                        id: $("#specializations").data("kendoDropDownList").value()
+                                    };
+                                }
+                            }
+                        }
+                    }
+                });
+                $("#primaryTextButton").kendoButton();
             });
-        });
-    })
-    </script>
-}
+            
+            function onChange(e) {
+                var orders = $("#doctors").data("kendoDropDownList");
+                orders.value("");
+            
+                if (e.sender.value() == "") {
+                    orders.enable(false);
+                } else {
+                    orders.enable(true);
+                }
+            }
+        </script>
+    </div>
+</div>
+</body>
+</html>

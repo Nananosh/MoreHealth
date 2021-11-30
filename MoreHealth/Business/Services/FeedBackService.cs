@@ -1,13 +1,12 @@
-﻿using MoreHealth.Business.Interfaces;
-using MoreHealth.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using MoreHealth.Business.Interfaces;
+using MoreHealth.Models;
 
 namespace MoreHealth.Business.Services
 {
     public class FeedBackService : IFeedBackService
     {
-
         public IEnumerable<Doctor> GetAllDoctors(ApplicationContext db)
         {
             IEnumerable<Doctor> doctors = db.Doctor;
@@ -28,18 +27,17 @@ namespace MoreHealth.Business.Services
 
             return specialization;
         }
-        
+
         public IEnumerable<Specialization> GetSpecializationsById(ApplicationContext db, int id)
         {
             var specializations = db.Specialization.Where(x => x.Department.Id == id);
 
             return specializations;
         }
-        
-        public IEnumerable<Doctor> GetDoctorsBySpecializaton(ApplicationContext db, int id)
-        {
-            var doctors = db.Doctor.Where(x => x.Specialization.Id == id);
 
+        public IQueryable GetDoctorsBySpecialization(ApplicationContext db, int id)
+        {
+            var doctors = db.Doctor.Select(x => new {x.Id, x.Name}).Where(x => x.Id == id);
             return doctors;
         }
     }

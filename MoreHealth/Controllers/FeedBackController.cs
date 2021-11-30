@@ -5,7 +5,10 @@ using MoreHealth.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using AutoMapper;
+using ItransitionCourseProject.ViewModels.Account;
 
 namespace MoreHealth.Controllers
 {
@@ -13,59 +16,44 @@ namespace MoreHealth.Controllers
     {
         private readonly ApplicationContext db;
         private readonly IFeedBackService feedBackService;
-        public FeedBackController(IFeedBackService feedBackService, ApplicationContext context)
+        private readonly IMapper mapper;
+        public FeedBackController(IFeedBackService feedBackService, ApplicationContext context,IMapper _mapper)
         {
             this.feedBackService = feedBackService;
             db = context;
+            mapper = _mapper;
         }
 
         public IActionResult Index(int? department, int? specializations)
-        { 
-            SelectList departmers = new SelectList(GetAllDepartment(), "Id", "DepartmentName", department.HasValue ? department.Value : 1);
-            ViewBag.DepartmentList = departmers;
-            SelectList specialization = new SelectList(GetSpecializationsById(department.HasValue ? department.Value : 1), "Id", "SpecializationName");
-            ViewBag.SpecialList = specialization;
-            SelectList doctors = new SelectList(GetDoctorsBySpecializaton(specializations.HasValue ? specializations.Value : 1), "Id", "Name");
-            ViewBag.DoctorList = doctors;
+        {
             return View();
         }
-
-        public IActionResult GetSpecializatons(int id)
-        {
-            return PartialView(GetSpecializationsById(id));
-        }
-
-        public IActionResult GetDoctors(int id)
-        {
-            return PartialView(GetDoctorsBySpecializaton(id));
-        }
-
-        public IEnumerable<Specialization> GetAllSpecialization()
+        
+        public JsonResult GetAllSpecialization()
         {
             var specializations = feedBackService.GetAllSpecialization(db);
             
-            return specializations;
+            return Json(specializations);
         }
 
-        public IEnumerable<Department> GetAllDepartment()
+        public IActionResult GetAllDepartment()
         {
             var departments = feedBackService.GetAllDepartment(db);
 
-            return departments;
+            return Json(mapper.Map<IEnumerable<DepartmentViewModel>>(departments));
         }
         
-        public IEnumerable<Specialization> GetSpecializationsById(int id)
+        public IActionResult GetSpecializationsById(int id)
         {
             var specializations = feedBackService.GetSpecializationsById(db, id);
 
-            return specializations;
+            return Json(mapper.Map<IEnumerable<SpecializationViewModel>>(specializations));;
         }
 
-        public IEnumerable<Doctor> GetDoctorsBySpecializaton(int id)
+        public IActionResult GetDoctorsBySpecialization(int id)
         {
-            var doctors = feedBackService.GetDoctorsBySpecializaton(db, id);
-
-            return doctors;
+            var doctors = feedBackService.GetDoctorsBySpecialization(db, id);
+            return Json(doctors);
         }
     }
 }
