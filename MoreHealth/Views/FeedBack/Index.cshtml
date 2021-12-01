@@ -1,7 +1,4 @@
-﻿<!DOCTYPE html>
-<html>
-<body>
-<div id="example">
+﻿<div id="example">
     <div class="k-content">
         <h4>Отделение:</h4>
         <input id="departments" style="width: 100%;" />
@@ -11,81 +8,108 @@
 
         <h4 style="margin-top: 2em;">Врачи:</h4>
         <input id="doctors" disabled="disabled" style="width: 100%;" />
-        <button id="primaryTextButton" class="k-primary">Отправить</button>
 
-        <script>
-            $(document).ready(function() {
-                var categories = $("#departments").kendoDropDownList({
-                    dataTextField: "departmentName",
-                    dataValueField: "id",
-                    optionLabel: "Выберите отделение...",
-                    height: 310,
-                    dataSource: {
-                        transport: {
-                            read: {
-                                url: "/Feedback/GetAllDepartment"
-                            }
-                        }
-                    }
-                }).data("kendoDropDownList");
-            
-                var products = $("#specializations").kendoDropDownList({
-                    autoBind: false,
-                    cascadeFrom: "departments",
-                    optionLabel: "Выберите специальность...",
-                    dataTextField: "specializationName",
-                    dataValueField: "id",
-                    change: onChange,
-                    dataSource: {
-                        serverFiltering: true,
-                        transport: {
-                            read: {
-                                url: "/Feedback/GetSpecializationsById",
-                                data: function() {
-                                    return {
-                                        id: $("#departments").data("kendoDropDownList").value()
-                                    };
-                                }
-                            }
-                        }
-                    }
-                }).data("kendoDropDownList");
-            
-                $("#doctors").kendoDropDownList({
-                    dataTextField: "name",
-                    dataValueField: "id",
-                    cascadeFrom: "specializations",
-                    optionLabel: "Выберите врача...",
-                    autoBind: false,
-                    dataSource: {
-                        serverFiltering: true,
-                        transport: {
-                            read: {
-                                url: "/Feedback/GetDoctorsBySpecialization",
-                                data: function() {
-                                    return {
-                                        id: $("#specializations").data("kendoDropDownList").value()
-                                    };
-                                }
-                            }
-                        }
-                    }
-                });
-                $("#primaryTextButton").kendoButton();
-            });
-            
-            function onChange(e) {
-                var orders = $("#doctors").data("kendoDropDownList");
-                orders.value("");
-            
-                if (e.sender.value() == "") {
-                    orders.enable(false);
-                } else {
-                    orders.enable(true);
-                }
-            }
-        </script>
+        <div style="margin-top: 2em;" class="form-group">
+            <textarea class="form-control" id="textArea" rows="3"></textarea>
+        </div>
+
+        <button id="but1" class="btn btn-primary">Главный</button>
     </div>
 </div>
-</body>
-</html>
+
+<script>
+    $(document).ready(function () {
+        document.getElementById('but1').disabled = true;
+
+        var categories = $("#departments").kendoDropDownList({
+            dataTextField: "departmentName",
+            dataValueField: "id",
+            optionLabel: "Выберите отделение...",
+            height: 310,
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/Feedback/GetAllDepartment"
+                    }
+                }
+            }
+        }).data("kendoDropDownList");
+
+        var products = $("#specializations").kendoDropDownList({
+            autoBind: false,
+            cascadeFrom: "departments",
+            optionLabel: "Выберите специальность...",
+            dataTextField: "specializationName",
+            dataValueField: "id",
+            change: onChange,
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: {
+                        url: "/Feedback/GetSpecializationsById",
+                        data: function () {
+                            return {
+                                id: $("#departments").data("kendoDropDownList").value()
+                            };
+                        }
+                    }
+                }
+            }
+        }).data("kendoDropDownList");
+
+        $("#doctors").kendoDropDownList({
+            dataTextField: "name",
+            dataValueField: "id",
+            cascadeFrom: "specializations",
+            optionLabel: "Выберите врача...",
+            select: onSelect,
+            autoBind: false,
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: {
+                        url: "/Feedback/GetDoctorsBySpecialization",
+                        data: function () {
+                            return {
+                                id: $("#specializations").data("kendoDropDownList").value()
+                            };
+                        }
+                    }
+                }
+            }
+        });
+        $("#primaryTextButton").kendoButton();
+    });
+
+    function onChange(e) {
+        console.log("change")
+        var orders = $("#doctors").data("kendoDropDownList");
+        orders.value("");
+
+        if (e.sender.value() == "") {
+            orders.enable(false);
+        } else {
+            orders.enable(true);
+        }
+        document.getElementById('but1').disabled = true;
+    }
+
+    function onSelect(e) {
+        console.log(e)
+        document.getElementById('but1').disabled = false;
+    }
+
+    $('#but1').click(function () {
+        var doctorid = $("#doctors").data("kendoDropDownList").value();
+        var message = $("#textArea").val();
+        var buildUrl = "@Url.Action("AddComment", "FeedBack")" + `/?isLike=true&doctorId=${doctorid}&message=${message}`;
+
+        $.ajax({
+            type: "POST",
+            url: buildUrl,
+            success: function(response) {
+                alert(response);
+            },
+        });
+    });
+</script>

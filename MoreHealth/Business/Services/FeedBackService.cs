@@ -40,5 +40,13 @@ namespace MoreHealth.Business.Services
             var doctors = db.Doctor.Select(x => new {x.Id, x.Name}).Where(x => x.Id == id);
             return doctors;
         }
+
+        public string AddComment(ApplicationContext db, bool isLike, int doctorId, string message)
+        {
+            db.Feedback.Add(new Feedback { DoctorId = doctorId, IsLike = isLike, Text = message, PatientId = 1 });
+
+            db.SaveChanges();
+            return "Отзыв добавлен!";
+        }
     }
 }

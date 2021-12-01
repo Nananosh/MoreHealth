@@ -15,5 +15,7 @@ namespace MoreHealth.Business.Interfaces
         IEnumerable<Specialization> GetSpecializationsById(ApplicationContext db, int id);
 
         IQueryable GetDoctorsBySpecialization(ApplicationContext db, int id);
+
+        string AddComment(ApplicationContext db, bool isLike, int doctorId, string message);
     }
 }

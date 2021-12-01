@@ -53,7 +53,16 @@ namespace MoreHealth.Controllers
         public IActionResult GetDoctorsBySpecialization(int id)
         {
             var doctors = feedBackService.GetDoctorsBySpecialization(db, id);
+
             return Json(doctors);
+        }
+
+        [HttpPost]
+        public IActionResult AddComment(bool isLike, int doctorId, string message)
+        {
+            var messageToUser = feedBackService.AddComment(db, isLike, doctorId, message);
+
+            return Json(messageToUser);
         }
     }
 }
