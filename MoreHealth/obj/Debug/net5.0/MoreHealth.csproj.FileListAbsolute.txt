@@ -163,3 +163,4 @@ F:\Education\More\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\FeedBack\Ge
 F:\Education\More\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\FeedBack\GetSpecializatons.cshtml.g.cs
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\FeedBack\Index.cshtml.g.cs
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\PaidServices\Index.cshtml.g.cs

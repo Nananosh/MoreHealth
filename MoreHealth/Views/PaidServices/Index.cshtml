@@ -1,0 +1,29 @@
+﻿@model List<PaidServices>
+<!--Currency Converter widget by FreeCurrencyRates.com -->
+
+<div id='gcw_mainFQyFY9Mkl' class='gcw_mainFQyFY9Mkl'></div>
+<a id='gcw_siteFQyFY9Mkl' href='https://freecurrencyrates.com/ru/'>FreeCurrencyRates.com</a>
+<script>function reloadFQyFY9Mkl(){ var sc = document.getElementById('scFQyFY9Mkl');if (sc) sc.parentNode.removeChild(sc);sc = document.createElement('script');sc.type = 'text/javascript';sc.charset = 'UTF-8';sc.async = true;sc.id='scFQyFY9Mkl';sc.src = 'https://freecurrencyrates.com/ru/widget-horizontal?iso=BYR-USD-EUR-RUB&df=2&p=FQyFY9Mkl&v=fits&source=fcr&width=900&width_title=225&firstrowvalue=1&thm=A6C9E2,FCFDFD,4297D7,5C9CCC,FFFFFF,C5DBEC,FCFDFD,2E6E9E,000000&title=Конвертер валют&tzo=-180';var div = document.getElementById('gcw_mainFQyFY9Mkl');div.parentNode.insertBefore(sc, div);} reloadFQyFY9Mkl(); </script>
+<!-- put custom styles here: .gcw_mainFQyFY9Mkl{}, .gcw_headerFQyFY9Mkl{}, .gcw_ratesFQyFY9Mkl{}, .gcw_sourceFQyFY9Mkl{} -->
+<!--End of Currency Converter widget by FreeCurrencyRates.com -->
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">Название</th>
+        <th scope="col">Описание</th>
+        <th scope="col">Цена для граждан РБ</th>
+        <th scope="col">Цена для иностранных граждан</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach(var paidServices in Model)
+    {
+        <tr>
+            <td>@paidServices.ServiceName</td>
+            <td style="max-width: 400px; word-wrap: break-word;">@paidServices.Description</td>
+            <td>@paidServices.Price Br</td>
+            <td>@paidServices.ForeignPrice Br</td>
+        </tr>
+    }
+    </tbody>
+</table>
