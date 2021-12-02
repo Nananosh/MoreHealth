@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ItransitionCourseProject.ViewModels.Account;
 using MoreHealth.Business.Interfaces;
 using MoreHealth.Models;
 
@@ -41,9 +42,16 @@ namespace MoreHealth.Business.Services
             return doctors;
         }
 
-        public string AddComment(ApplicationContext db, bool isLike, int doctorId, string message)
+        public string AddComment(ApplicationContext db, FeedbackViewModel feedbackViewModel)
         {
-            db.Feedback.Add(new Feedback { DoctorId = doctorId, IsLike = isLike, Text = message, PatientId = 1 });
+            db.Feedback.Add(
+                new Feedback
+                {
+                    DoctorId = feedbackViewModel.Doctor.Id,
+                    IsLike = feedbackViewModel.IsLike,
+                    Text = feedbackViewModel.Text,
+                    PatientId = feedbackViewModel.Patient.Id
+                });
 
             db.SaveChanges();
             return "Отзыв добавлен!";

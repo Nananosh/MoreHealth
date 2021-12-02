@@ -1,16 +1,22 @@
-﻿<div id="example">
+﻿
+<div id="example">
     <div class="k-content">
         <h4>Отделение:</h4>
-        <input id="departments" style="width: 100%;" />
+        <input id="departments" style="width: 100%;"/>
 
         <h4 style="margin-top: 2em;">Специализация:</h4>
-        <input id="specializations" disabled="disabled" style="width: 100%;" />
+        <input id="specializations" disabled="disabled" style="width: 100%;"/>
 
         <h4 style="margin-top: 2em;">Врачи:</h4>
-        <input id="doctors" disabled="disabled" style="width: 100%;" />
+        <input id="doctors" disabled="disabled" style="width: 100%;"/>
 
         <div style="margin-top: 2em;" class="form-group">
             <textarea class="form-control" id="textArea" rows="3"></textarea>
+        </div>
+
+        <div style="margin-top: 2em;" class="form-group">
+            <button id="like" class="btn btn-primary" onclick="">Like</button>
+            <button id="dislike" class="btn btn-primary" onclick="">Dislike</button>
         </div>
 
         <button id="but1" class="btn btn-primary">Главный</button>
@@ -82,7 +88,6 @@
     });
 
     function onChange(e) {
-        console.log("change")
         var orders = $("#doctors").data("kendoDropDownList");
         orders.value("");
 
@@ -98,12 +103,18 @@
         console.log(e)
         document.getElementById('but1').disabled = false;
     }
-
+    let isLike;
+    $('#like').click(function (){
+        isLike = 1;
+    });
+    $('#dislike').click(function (){
+        isLike = 0;
+        });
     $('#but1').click(function () {
         var doctorid = $("#doctors").data("kendoDropDownList").value();
         var message = $("#textArea").val();
-        var buildUrl = "@Url.Action("AddComment", "FeedBack")" + `/?isLike=true&doctorId=${doctorid}&message=${message}`;
-
+        var userId = "@User.Claims.ElementAt(0).Value";
+        var buildUrl = "@Url.Action("AddComment", "FeedBack")" + `/?isLike=${isLike}&doctorId=${doctorid}&userId=${userId}&message=${message}`;
         $.ajax({
             type: "POST",
             url: buildUrl,

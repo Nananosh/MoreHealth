@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ItransitionCourseProject.ViewModels.Account;
 using MoreHealth.Models;
 
 namespace MoreHealth.Business.Interfaces
@@ -16,6 +17,6 @@ namespace MoreHealth.Business.Interfaces
 
         IQueryable GetDoctorsBySpecialization(ApplicationContext db, int id);
 
-        string AddComment(ApplicationContext db, bool isLike, int doctorId, string message);
+        string AddComment(ApplicationContext db, FeedbackViewModel feedbackViewModel);
     }
 }

@@ -8,23 +8,6 @@ namespace MoreHealth.ViewModels.Mappings
     {
         public UserMappingProfile()
         {
-            CreateMap<FeedbackViewModel, Feedback>()
-                .ForMember(dest => dest.Id,
-                    opt => opt.MapFrom
-                        (src => src.Id))
-                .ForMember(dest => dest.Patient,
-                    opt => opt.MapFrom
-                        (src => src.Patient))
-                .ForMember(dest => dest.Doctor,
-                    opt => opt.MapFrom
-                        (src => src.Doctor))
-                .ForMember(dest => dest.Text,
-                    opt => opt.MapFrom
-                        (src => src.Text))
-                .ForMember(dest => dest.IsLike,
-                    opt => opt.MapFrom
-                        (src => src.IsLike));
-
             CreateMap<DepartmentViewModel, Department>()
                 .ForMember(dest => dest.Id,
                     opt => opt.MapFrom
@@ -34,7 +17,7 @@ namespace MoreHealth.ViewModels.Mappings
                         (src => src.DepartmentName))
                 .ForMember(dest => dest.Specializations,
                     opt => opt.Ignore()).ReverseMap();
-            
+
             CreateMap<SpecializationViewModel, Specialization>()
                 .ForMember(dest => dest.Id,
                     opt => opt.MapFrom
@@ -45,8 +28,8 @@ namespace MoreHealth.ViewModels.Mappings
                 .ForMember(dest => dest.Doctors,
                     opt => opt.Ignore())
                 .ForMember(dest => dest.Department,
-                opt => opt.Ignore()).ReverseMap();
-            
+                    opt => opt.Ignore()).ReverseMap();
+
             CreateMap<DoctorViewModel, Doctor>()
                 .ForMember(dest => dest.Id,
                     opt => opt.MapFrom

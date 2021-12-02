@@ -41,6 +41,7 @@ namespace MoreHealth
             services.AddControllersWithViews();
 
             services.AddScoped<IFeedBackService, FeedBackService>();
+            services.AddScoped<IDoctorOrPatientService, DoctorOrPatientService>();
 
             services.AddDbContext<ApplicationContext>(
                 options =>

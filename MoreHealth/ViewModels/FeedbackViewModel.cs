@@ -5,15 +5,53 @@ namespace ItransitionCourseProject.ViewModels.Account
 {
     public class FeedbackViewModel
     {
-        [Required]
         public int Id { get; set; }
-        [Required]
+
         public Patient Patient { get; set; }
-        [Required]
+
+        public int ? PatientId
+        {
+            get => Patient?.Id;
+            set
+            {
+                if (value == null)
+                {
+                    Patient = null;
+                    return;
+                }
+
+                if (Patient == null)
+                {
+                    Patient = new Patient();
+                }
+
+                Patient.Id = value.Value;
+            }
+        }
+
         public Doctor Doctor { get; set; }
-        [Required]
+
+        public int? DoctorId
+        {
+            get => Doctor?.Id;
+            set
+            {
+                if (value == null)
+                {
+                    Doctor = null;
+                    return;
+                }
+
+                if (Doctor == null)
+                {
+                    Doctor = new Doctor();
+                }
+
+                Doctor.Id = value.Value;
+            }
+        }
+
         public string Text { get; set; }
-        [Required]
         public bool IsLike { get; set; }
     }
 }

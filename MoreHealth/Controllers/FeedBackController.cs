@@ -9,30 +9,37 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using AutoMapper;
 using ItransitionCourseProject.ViewModels.Account;
+using Microsoft.AspNetCore.Authorization;
+using MoreHealth.Business.Services;
 
 namespace MoreHealth.Controllers
 {
+    [Authorize]
     public class FeedBackController : Controller
     {
         private readonly ApplicationContext db;
         private readonly IFeedBackService feedBackService;
+        private readonly IDoctorOrPatientService doctorOrPatientService;
         private readonly IMapper mapper;
-        public FeedBackController(IFeedBackService feedBackService, ApplicationContext context,IMapper _mapper)
+
+        public FeedBackController(IFeedBackService feedBackService, ApplicationContext context, IMapper mapper,
+            IDoctorOrPatientService doctorOrPatientService)
         {
             this.feedBackService = feedBackService;
+            this.doctorOrPatientService = doctorOrPatientService;
             db = context;
-            mapper = _mapper;
+            this.mapper = mapper;
         }
 
         public IActionResult Index(int? department, int? specializations)
         {
             return View();
         }
-        
+
         public JsonResult GetAllSpecialization()
         {
             var specializations = feedBackService.GetAllSpecialization(db);
-            
+
             return Json(specializations);
         }
 
@@ -42,12 +49,13 @@ namespace MoreHealth.Controllers
 
             return Json(mapper.Map<IEnumerable<DepartmentViewModel>>(departments));
         }
-        
+
         public IActionResult GetSpecializationsById(int id)
         {
             var specializations = feedBackService.GetSpecializationsById(db, id);
 
-            return Json(mapper.Map<IEnumerable<SpecializationViewModel>>(specializations));;
+            return Json(mapper.Map<IEnumerable<SpecializationViewModel>>(specializations));
+            ;
         }
 
         public IActionResult GetDoctorsBySpecialization(int id)
@@ -58,10 +66,14 @@ namespace MoreHealth.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddComment(bool isLike, int doctorId, string message)
+        public IActionResult AddComment(byte isLike, int doctorId, string userId, string message)
         {
-            var messageToUser = feedBackService.AddComment(db, isLike, doctorId, message);
-
+            var messageToUser = feedBackService.AddComment(db,
+                new FeedbackViewModel
+                {
+                    DoctorId = doctorId, PatientId = doctorOrPatientService.GetPatientByUserId(db, userId),
+                    IsLike = Convert.ToBoolean(isLike), Text = message
+                });
             return Json(messageToUser);
         }
     }
