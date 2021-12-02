@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MoreHealth.Business.Interfaces;
 using MoreHealth.Business.Services;
+using MoreHealth.Controllers;
 using MoreHealth.Models;
 using MoreHealth.ViewModels.Mappings;
 
@@ -42,6 +43,7 @@ namespace MoreHealth
 
             services.AddScoped<IFeedBackService, FeedBackService>();
             services.AddScoped<IDoctorOrPatientService, DoctorOrPatientService>();
+            services.AddScoped<IPaidServicesService, PaidServicesService>();
 
             services.AddDbContext<ApplicationContext>(
                 options =>
