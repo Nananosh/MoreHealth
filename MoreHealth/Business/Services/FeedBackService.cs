@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ItransitionCourseProject.ViewModels.Account;
+using Microsoft.EntityFrameworkCore;
 using MoreHealth.Business.Interfaces;
 using MoreHealth.Models;
 
@@ -27,6 +28,13 @@ namespace MoreHealth.Business.Services
             var specialization = db.Department;
 
             return specialization;
+        }
+
+        public IEnumerable<Appointment> GetAllTalons(ApplicationContext db)
+        {
+            var appointments = db.Appointments.Include(c => c.Cabinet).Include(d => d.Doctor).Include(p => p.Patient);
+
+            return appointments;
         }
 
         public IEnumerable<Specialization> GetSpecializationsById(ApplicationContext db, int id)

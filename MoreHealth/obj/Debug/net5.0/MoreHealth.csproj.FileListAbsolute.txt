@@ -159,8 +159,9 @@ F:\Education\More\MoreHealth\MoreHealth\obj\Debug\net5.0\MoreHealth.genruntimeco
 F:\Education\More\MoreHealth\MoreHealth\bin\Debug\net5.0\AutoMapper.dll
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\bin\Debug\net5.0\AutoMapper.dll
 F:\Education\More\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\FeedBack\Index.cshtml.g.cs
-F:\Education\More\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\FeedBack\GetDoctors.cshtml.g.cs
-F:\Education\More\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\FeedBack\GetSpecializatons.cshtml.g.cs
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\FeedBack\Index.cshtml.g.cs
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\PaidServices\Index.cshtml.g.cs
+F:\Education\More\MoreHealth\MoreHealth\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+F:\Education\More\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Appointment\Index.cshtml.g.cs
+F:\Education\More\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\PaidServices\Index.cshtml.g.cs

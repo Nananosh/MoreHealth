@@ -1,0 +1,73 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<button id="create" class="k-button">Create Task</button>
+<div id="ticketPlan"></div>
+
+<script>
+    $(function () {
+        $("#ticketPlan").kendoScheduler({
+            date: new Date("2021/12/05"),
+            startTime: new Date("2021/12/05 07:00 AM"),
+            height: 600,
+            views: [
+                "day",
+                { type: "workWeek", selected: true },
+                "week",
+                "month",
+                "agenda"
+            ],
+            timezone: "Etc/UTC",
+            edit: function (e) {
+                e.preventDefault();
+                
+            },
+            dataSource: {
+                batch: true,
+                transport: {
+                    read: {
+                        url: "/Appointment/GetAllTalons",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "taskId", // (Mandatory) The "id" of the event is the "taskId" field.
+                        fields: {
+                            // Describe the Scheduler event fields and map them to the fields returned by the remote service.
+                            taskId: {
+                                from: "Id", // The 'TaskID' server-side field is mapped to the 'taskId' client-side field.
+                                type: "number"
+                            },
+                            title: {
+                                from: "patient.surname", // The 'Title' server-side field is mapped to the 'title' client-side field.
+                                defaultValue: "No title",
+                                validation: { required: true }
+                            },
+                            start: {
+                                type: "date",
+                                from: "dateStart" // The 'Start' server-side field is mapped to the 'start' client-side field.
+                            },
+                            end: {
+                                type: "date",
+                                from: "dateEnd" // The 'End' server-side field is mapped to the 'end' client-side field.
+                            },
+                            description: {
+                                from: "address"
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        $("#create").click(function () {
+            $("#ticketPlan").data("kendoScheduler").addEvent({
+                start: new Date("2013/6/13"),
+                end: new Date("2013/6/13")
+            });
+        });
+    });
+</script>
