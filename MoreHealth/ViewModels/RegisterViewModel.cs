@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ItransitionCourseProject.ViewModels.Account
 {
@@ -23,5 +24,29 @@ namespace ItransitionCourseProject.ViewModels.Account
         [DataType(DataType.Password)]
         [Display(Name = "Repeat the password")]
         public string PasswordConfirm { get; set; }
+        
+        [Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+        
+        [Required]
+        [Display(Name = "Surname")]
+        public string Surname { get; set; }
+        
+        [Required]
+        [Display(Name = "LastName")]
+        public string Lastname { get; set; }
+        
+        [Required]
+        [Display(Name = "IsPatient")]
+        public bool IsPatient { get; set; }
+        
+        [Required]
+        [Display(Name = "DateBirth")]
+        public DateTime DateBirth { get; set; }
+        
+        [Required]
+        [Display(Name = "Address")]
+        public string Address { get; set; }
     }
 }

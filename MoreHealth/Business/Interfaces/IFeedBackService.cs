@@ -14,9 +14,7 @@ namespace MoreHealth.Business.Interfaces
         IEnumerable<Department> GetAllDepartment(ApplicationContext db);
 
         IEnumerable<Specialization> GetSpecializationsById(ApplicationContext db, int id);
-
-        IEnumerable<Appointment> GetAllTalons(ApplicationContext db);
-
+        
         IQueryable GetDoctorsBySpecialization(ApplicationContext db, int id);
 
         string AddComment(ApplicationContext db, FeedbackViewModel feedbackViewModel);
