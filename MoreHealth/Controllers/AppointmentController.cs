@@ -13,26 +13,20 @@ namespace MoreHealth.Controllers
     public class AppointmentController : Controller
     {
         private readonly ApplicationContext db;
-        private readonly IFeedBackService feedBackService;
-        private readonly IDoctorOrPatientService doctorOrPatientService;
+        private readonly IAppointmentService appointmentService;
         private readonly IMapper mapper;
 
-        public AppointmentController(IFeedBackService feedBackService, ApplicationContext context, IMapper mapper,
-            IDoctorOrPatientService doctorOrPatientService)
+        public AppointmentController(ApplicationContext context, IMapper mapper,
+            IAppointmentService appointmentService)
         {
-            this.feedBackService = feedBackService;
-            this.doctorOrPatientService = doctorOrPatientService;
+            this.appointmentService = appointmentService;
             db = context;
             this.mapper = mapper;
-        }
-        public IActionResult Index()
-        {
-            return View();
         }
 
         public IActionResult GetAllTalons()
         {
-            var talons = feedBackService.GetAllTalons(db);
+            var talons = appointmentService.GetAllTalons(db);
 
             return Json(mapper.Map<IEnumerable<AppointmentViewModel>>(talons));
         }

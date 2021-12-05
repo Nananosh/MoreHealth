@@ -30,13 +30,6 @@ namespace MoreHealth.Business.Services
             return specialization;
         }
 
-        public IEnumerable<Appointment> GetAllTalons(ApplicationContext db)
-        {
-            var appointments = db.Appointments.Include(c => c.Cabinet).Include(d => d.Doctor).Include(p => p.Patient);
-
-            return appointments;
-        }
-
         public IEnumerable<Specialization> GetSpecializationsById(ApplicationContext db, int id)
         {
             var specializations = db.Specialization.Where(x => x.Department.Id == id);

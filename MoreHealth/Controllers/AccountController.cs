@@ -40,8 +40,21 @@ namespace MoreHealth.Controllers
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
+                    await _database.Patient.AddAsync(new Patient
+                    {
+                        User = user,
+                        Name = model.Name,
+                        Surname = model.Surname,
+                        LastName = model.Lastname,
+                        IsPatient = model.IsPatient,
+                        DateBirth = model.DateBirth,
+                        Address = model.Address
+                    });
+                    await _database.SaveChangesAsync();
+                    await _userManager.AddToRoleAsync(user, "Patient");
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }
@@ -70,7 +83,7 @@ namespace MoreHealth.Controllers
                 {
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                         return Redirect(model.ReturnUrl);
-                    
+
                     await _database.SaveChangesAsync();
                     return RedirectToAction("Index", "Home");
                 }

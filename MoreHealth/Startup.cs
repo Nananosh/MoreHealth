@@ -44,6 +44,7 @@ namespace MoreHealth
             services.AddScoped<IFeedBackService, FeedBackService>();
             services.AddScoped<IDoctorOrPatientService, DoctorOrPatientService>();
             services.AddScoped<IPaidServicesService, PaidServicesService>();
+            services.AddScoped<IAppointmentService, AppointmentService>();
 
             services.AddDbContext<ApplicationContext>(
                 options =>
