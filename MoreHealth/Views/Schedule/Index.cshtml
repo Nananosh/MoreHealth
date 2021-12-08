@@ -6,7 +6,9 @@
 <button id="create" class="k-button">Create Task</button>
 <div id="ticketPlan"></div>
 
+<div id="aaaa">Никита пидр</div>
 <script>
+var date = "FREQ=WEEKLY;BYDAY=TU,TH"
     $(function () {
         $("#ticketPlan").kendoScheduler({
             date: new Date("2021/12/05"),
@@ -19,11 +21,8 @@
                 "month",
                 "agenda"
             ],
-            timezone: "Etc/UTC",
-            edit: function (e) {
-                e.preventDefault();
-                
-            },
+            timezone: "Europe/Minsk",
+           
             dataSource: {
                 batch: true,
                 transport: {
@@ -56,7 +55,8 @@
                             },
                             description: {
                                 from: "address"
-                            }
+                            },
+                            recurrenceRule: {from : "recurrenceRule"}
                         }
                     }
                 }

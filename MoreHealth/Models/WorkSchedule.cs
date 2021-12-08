@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MoreHealth.Models
 {
     public class WorkSchedule
     {
         public int Id { get; set; }
-        public List<Doctor> Doctor { get; set; }
-        public WorkingShift WorkingShift { get; set; }
-        public WorkDate WorkDate { get; set; }
+        public Doctor Doctor { get; set; }
+        public string RecurrenceRule { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 }

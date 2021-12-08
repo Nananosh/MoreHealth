@@ -27,7 +27,7 @@ namespace MoreHealth.Controllers
         public IActionResult GetAllTalons()
         {
             var talons = appointmentService.GetAllTalons(db);
-
+            
             return Json(mapper.Map<IEnumerable<AppointmentViewModel>>(talons));
         }
     }
