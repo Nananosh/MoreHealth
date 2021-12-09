@@ -9,7 +9,7 @@ namespace MoreHealth.Business.Services
     {
         public IEnumerable<Appointment> GetAllTalons(ApplicationContext db)
         {
-            var appointments = db.Appointments.Include(c => c.Cabinet).Include(d => d.Doctor).Include(p => p.Patient);
+            var appointments = db.Appointments.Include(d => d.Doctor).Include(p => p.Patient);
 
             return appointments;
         }

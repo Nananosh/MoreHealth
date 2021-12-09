@@ -11,7 +11,7 @@ namespace MoreHealth.Models
         public string Surname { get; set; }
         public string LastName { get; set; }
         public List<Feedback> Feedbacks { get; set; }
-        public List<Cabinet> Cabinets { get; set; }
+        public Cabinet Cabinet { get; set; }
         public List<WorkSchedule> WorkSchedules { get; set; }
     }
 }

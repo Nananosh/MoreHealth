@@ -8,7 +8,6 @@ namespace MoreHealth.ViewModels
         public int Id { get; set; }
         public Patient Patient { get; set; }
         public Doctor Doctor { get; set; }
-        public Cabinet Cabinet { get; set; }
         public string Address { get; set; }
         public DateTime DateStart { get; set; }
         public DateTime DateEnd { get => DateStart.AddMinutes(15); }

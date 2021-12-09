@@ -32,17 +32,15 @@ namespace MoreHealth.ViewModels.Mappings
             CreateMap<AppointmentViewModel, Appointment>()
                 .ForMember(x => x.Address,
                     opt => opt.MapFrom(src => src.Address))
-                .ForMember(x => x.Cabinet,
-                    opt => opt.MapFrom(src => src.Cabinet))
-                .ForMember(x => x.Date,
+                .ForMember(x => x.DateStart,
                     opt => opt.MapFrom(src => src.DateStart))
+                .ForMember(x => x.DateEnd,
+                    opt => opt.MapFrom(src => src.DateEnd))
                 .ForMember(x => x.Doctor,
                     opt => opt.MapFrom(src => src.Doctor))
                 .ForMember(x => x.Id,
                     opt => opt.MapFrom(src => src.Id))
                 .ForMember(x => x.Patient,
-                    opt => opt.MapFrom(src => src.Patient))
-                .ForMember(x => x.IsHome,
                     opt => opt.Ignore()).ReverseMap();
             CreateMap<DoctorViewModel, Doctor>()
                 .ForMember(dest => dest.Id,
@@ -65,7 +63,7 @@ namespace MoreHealth.ViewModels.Mappings
                         (src => src.LastName))
                 .ForMember(dest => dest.Feedbacks,
                     opt => opt.Ignore())
-                .ForMember(dest => dest.Cabinets,
+                .ForMember(dest => dest.Cabinet,
                     opt => opt.Ignore())
                 .ForMember(dest => dest.WorkSchedules,
                     opt => opt.Ignore()).ReverseMap();

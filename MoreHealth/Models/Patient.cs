@@ -14,5 +14,6 @@ namespace MoreHealth.Models
         public DateTime DateBirth { get; set; }
         public string Address { get; set; }
         public List<Feedback> Feedbacks { get; set; }
+        public List<AppointmentHome> AppointmentHomes { get; set; }
     }
 }

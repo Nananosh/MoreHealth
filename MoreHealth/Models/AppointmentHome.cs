@@ -2,13 +2,11 @@
 
 namespace MoreHealth.Models
 {
-    public class Appointment
+    public class AppointmentHome
     {
         public int Id { get; set; }
         public Patient Patient { get; set; }
-        public Doctor Doctor { get; set; }
         public string Address { get; set; }
-        public DateTime DateStart { get; set; }
-        public DateTime DateEnd { get; set; }
+        public DateTime Date { get; set; }
     }
 }
