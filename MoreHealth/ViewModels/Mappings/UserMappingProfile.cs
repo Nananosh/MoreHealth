@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using ItransitionCourseProject.ViewModels.Account;
 using MoreHealth.Models;
+using MoreHealth.ViewModels.Account;
 
 namespace MoreHealth.ViewModels.Mappings
 {
@@ -29,9 +29,40 @@ namespace MoreHealth.ViewModels.Mappings
                     opt => opt.Ignore())
                 .ForMember(dest => dest.Department,
                     opt => opt.Ignore()).ReverseMap();
+
+            CreateMap<AppointmentHomeViewModel, AppointmentHome>()
+                .ForMember(dest => dest.Id,
+                    opt => opt.MapFrom
+                        (src => src.Id))
+                .ForMember(x => x.PatientId, opt => opt.MapFrom(x => x.PatientId))
+                .ForMember(dest => dest.Address,
+                    opt => opt.MapFrom
+                        (src => src.Address))
+                .ForMember(dest => dest.Patient,
+                    opt => opt.Ignore())
+                .ForMember(dest => dest.Date,
+                    opt => opt.MapFrom(x => x.Date)).ReverseMap();
+
+            CreateMap<FeedbackViewModel, Feedback>()
+                .ForMember(dest => dest.Id,
+                    opt => opt.MapFrom
+                        (src => src.Id))
+                .ForMember(x => x.PatientId, opt => opt.MapFrom(x => x.PatientId))
+                .ForMember(dest => dest.Patient,
+                    opt => opt.Ignore())
+                .ForMember(dest => dest.Doctor,
+                    opt => opt.Ignore())
+                .ForMember(x => x.DoctorId, opt => opt.MapFrom(x => x.DoctorId))
+                .ForMember(dest => dest.IsLike,
+                    opt => opt.MapFrom(x => x.IsLike))
+                .ForMember(dest => dest.Text,
+                    opt => opt.MapFrom(x => x.Text)).ReverseMap();
+
             CreateMap<AppointmentViewModel, Appointment>()
                 .ForMember(x => x.Address,
                     opt => opt.MapFrom(src => src.Address))
+                .ForMember(x => x.PatientId,
+                    opt => opt.MapFrom(src => src.PatientId))
                 .ForMember(x => x.DateStart,
                     opt => opt.MapFrom(src => src.DateStart))
                 .ForMember(x => x.DateEnd,

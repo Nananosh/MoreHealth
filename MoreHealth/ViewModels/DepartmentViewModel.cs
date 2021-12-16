@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using MoreHealth.Models;
 
-namespace ItransitionCourseProject.ViewModels.Account
+namespace MoreHealth.ViewModels.Account
 {
     public class DepartmentViewModel
     {

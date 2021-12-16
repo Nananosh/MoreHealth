@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ItransitionCourseProject.ViewModels.Account
+namespace MoreHealth.ViewModels.Account
 {
     public class RegisterViewModel
     {

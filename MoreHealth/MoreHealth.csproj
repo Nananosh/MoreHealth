@@ -19,20 +19,4 @@
       </PackageReference>
     </ItemGroup>
 
-    <ItemGroup>
-      <Compile Remove="Views\Appointment\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Remove="Views\Appointment\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Remove="Views\Appointment\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Content Remove="Views\Appointment\**" />
-    </ItemGroup>
-
 </Project>

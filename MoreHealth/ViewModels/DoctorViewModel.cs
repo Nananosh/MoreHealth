@@ -1,6 +1,6 @@
 ﻿using MoreHealth.Models;
 
-namespace ItransitionCourseProject.ViewModels.Account
+namespace MoreHealth.ViewModels.Account
 {
     public class DoctorViewModel
     {
@@ -10,5 +10,7 @@ namespace ItransitionCourseProject.ViewModels.Account
         public string Name { get; set; }
         public string Surname { get; set; }
         public string LastName { get; set; }
+
+        public string FullName { get => Name + " " + Surname + " " + LastName; }
     }
 }

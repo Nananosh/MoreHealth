@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ItransitionCourseProject.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MoreHealth.Models;
+using MoreHealth.ViewModels.Account;
 
 namespace MoreHealth.Controllers
 {

@@ -1,4 +1,4 @@
-﻿namespace ItransitionCourseProject.ViewModels.Account
+﻿namespace MoreHealth.ViewModels.Account
 {
     public class SpecializationViewModel
     {

@@ -8,13 +8,13 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using AutoMapper;
-using ItransitionCourseProject.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;
 using MoreHealth.Business.Services;
+using MoreHealth.ViewModels;
+using MoreHealth.ViewModels.Account;
 
 namespace MoreHealth.Controllers
 {
-    [Authorize]
     public class FeedBackController : Controller
     {
         private readonly ApplicationContext db;
@@ -31,9 +31,17 @@ namespace MoreHealth.Controllers
             this.mapper = mapper;
         }
 
+        [Authorize]
         public IActionResult Index(int? department, int? specializations)
         {
             return View();
+        }
+
+        public JsonResult GetAllDoctors()
+        {
+            var doctors = feedBackService.GetAllDoctors(db);
+
+            return Json(mapper.Map<IEnumerable<DoctorViewModel>>(doctors));
         }
 
         public JsonResult GetAllSpecialization()
@@ -68,12 +76,15 @@ namespace MoreHealth.Controllers
         [HttpPost]
         public IActionResult AddComment(byte isLike, int doctorId, string userId, string message)
         {
-            var messageToUser = feedBackService.AddComment(db,
-                new FeedbackViewModel
-                {
-                    DoctorId = doctorId, PatientId = doctorOrPatientService.GetPatientByUserId(db, userId),
-                    IsLike = Convert.ToBoolean(isLike), Text = message
-                });
+            var model = new FeedbackViewModel
+            {
+                DoctorId = doctorId,
+                PatientId = doctorOrPatientService.GetPatientByUserId(db, userId),
+                IsLike = Convert.ToBoolean(isLike),
+                Text = message
+            };
+            var messageToUser = feedBackService.AddComment(db, mapper.Map<Feedback>(model));
+
             return Json(messageToUser);
         }
     }
