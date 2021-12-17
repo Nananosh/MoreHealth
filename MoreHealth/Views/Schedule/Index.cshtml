@@ -11,63 +11,52 @@
       </div>
     <div data-container-for="start" class="k-edit-field">
         <input type="text"
-               data-role="datetimepicker"
-               data-interval="15"
-               data-type="date"
-               data-bind="value:start,invisible:isAllDay"
-               name="start"/>
-        <input type="text" data-type="date" data-role="datepicker" data-bind="value:start,visible:isAllDay" name="start" />
+            data-role="datetimepicker"
+            data-interval="15"
+            data-type="date"
+            data-bind="value:StartDate,invisible:isAllDay"
+            name="StartDate"
+            style="width: 60%;" />
+        <input type="text"
+            data-type="date"
+            data-role="datepicker"
+            data-bind="value:StartDate,visible:isAllDay"
+            name="StartDate"
+            style="width: 60%;"/>
         <span data-bind="text: startTimezone"></span>
         <span data-for="start" class="k-invalid-msg" style="display: none;"></span>
       </div>
     <div class="k-edit-label"><label for="end">End</label></div>
-    <div data-container-for="end" class="k-edit-field">
-        <input type="text" data-type="date" data-role="datetimepicker" data-bind="value:end,invisible:isAllDay" name="end" data-datecompare-msg="End date should be greater than or equal to the start date" />
-        <input type="text" data-type="date" data-role="datepicker" data-bind="value:end,visible:isAllDay" name="end" data-datecompare-msg="End date should be greater than or equal to the start date" />
+    <div data-container-for="end" class="k-edit-field" >
+        <input type="text"
+            data-type="date"
+            data-role="datetimepicker"
+            data-bind="value:EndDate,invisible:isAllDay"
+            name="EndDate"
+            data-datecompare-msg="End date should be greater than or equal to the start date"
+            style="width: 60%;" />
+        <input type="text"
+            data-type="date"
+            data-role="datepicker"
+            data-bind="value:EndDate,visible:isAllDay"
+            name="EndDate"
+            data-datecompare-msg="End date should be greater than or equal to the start date"
+            style="width: 60%;" />
         <span data-bind="text: endTimezone"></span>
         <span data-bind="text: startTimezone, invisible: endTimezone"></span>
         <span data-for="end" class="k-invalid-msg" style="display: none;"></span>
       </div>
+    <div class="k-edit-label"><label for="ownerId">Врач</label></div>
+    <div class="k-edit-field">
+        <input id="DoctorId" style="width: 60%;" />
+    </div>
     <div class="k-edit-label"><label for="recurrenceRule">Repeat</label></div>
     <div data-container-for="recurrenceRule" class="k-edit-field">
-        <div data-bind="value:recurrenceRule" name="recurrenceRule" data-role="recurrenceeditor"></div>
+        <div data-bind="value:RecurrenceRule" name="recurrenceRule" data-role="recurrenceeditor"></div>
       </div>
-    <div class="k-edit-label"><label for="ownerId">Owner</label></div>
-        <input id="doctors" style="width: 100%;" />
-
-    # $("#doctors").kendoDropDownList({ #
-        # dataTextField: "fullName", #
-        # dataValueField: "id", #
-        # optionLabel: "Выберите врача...", #
-        # height: 500, #
-        # dataSource: { #
-           # transport: { #
-               # read: { #
-                   # url: "@Url.Action("GetAllDoctors", "FeedBack")", #
-                   # dataType: "json", #
-                   # cache: false #
-              # } #
-          #  } #
-      # } #
-    # }); #
 </script>   
 
 <script>
-    $("#doctors").kendoDropDownList({
-        dataTextField: "fullName",
-        dataValueField: "id",
-        optionLabel: "Выберите врача...",
-        height: 500,
-        dataSource: {
-            transport: {
-                read: {
-                    url: "@Url.Action("GetAllDoctors", "FeedBack")",
-                    dataType: "json",
-                    cache: false
-                }
-            }
-        }
-    });
 var date = "FREQ=WEEKLY;BYDAY=TU,TH"
     $(function () {
         $("#ticketPlan").kendoScheduler({
@@ -82,10 +71,43 @@ var date = "FREQ=WEEKLY;BYDAY=TU,TH"
                 "agenda"
             ],
             timezone: "Europe/Minsk",
-           editable: { template: $("#customEditorTemplate").html()},
+            editable: {
+                window: {
+                    width: 640,
+                    scrollable: false,
+                    resizable: false
+                },
+                template: $("#customEditorTemplate").html()
+            },
+            edit: function (e) {
+                $("#DoctorId").kendoDropDownList({
+                    dataTextField: "fullName",
+                    dataValueField: "id",
+                    optionLabel: "Выберите врача...",
+                    height: 500,
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: "@Url.Action("GetAllDoctors", "FeedBack")",
+                                dataType: "json",
+                                cache: false
+                            }
+                        }
+                    }
+                })
+            },
             dataSource: {
                 batch: true,
                 transport: {
+                    //create: function (options) {
+                    //    CreateEvent("/Appointment/AddEvent", options);
+                    //},
+                    create: {
+                        url: "/Appointment/AddEvent",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        type: "POST"
+                        },
                     read: {
                         url: "/Appointment/GetAllTalons",
                         dataType: "json"
@@ -99,11 +121,6 @@ var date = "FREQ=WEEKLY;BYDAY=TU,TH"
                             taskId: {
                                 from: "Id", // The 'TaskID' server-side field is mapped to the 'taskId' client-side field.
                                 type: "number"
-                            },
-                            title: {
-                                from: "patient.surname", // The 'Title' server-side field is mapped to the 'title' client-side field.
-                                defaultValue: "No title",
-                                validation: { required: true }
                             },
                             start: {
                                 type: "date",
@@ -119,12 +136,22 @@ var date = "FREQ=WEEKLY;BYDAY=TU,TH"
                 }
             }
         });
-
-        $("#create").click(function () {
-            $("#ticketPlan").data("kendoScheduler").addEvent({
-                start: new Date("2013/6/13"),
-                end: new Date("2013/6/13")
-            });
-        });
     });
+    //function CreateEvent(url, options) {
+    //    console.log(options);
+    //    $.ajax({
+    //        url: url,
+    //        contentType: "application/json",
+    //        type: "POST",
+    //        data: JSON.stringify({
+    //            gap: options.data,
+    //        }),
+    //        success: function (result) {
+    //            options.success(result);
+    //        },
+    //        error: function (result) {
+    //            options.error(result);
+    //        }
+    //    });
+    //}
 </script>

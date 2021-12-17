@@ -38,6 +38,11 @@ namespace MoreHealth.Controllers
 
             return Json(mapper.Map<IEnumerable<AppointmentViewModel>>(talons));
         }
+        
+        public IActionResult AddEvent(WorkScheduleViewModel model)
+        {
+            return View();
+        }
 
         public IActionResult AddPatientTalon(int talon, string address, string userid)
         {

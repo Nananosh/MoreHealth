@@ -7,6 +7,7 @@ namespace MoreHealth.Models
     {
         public int Id { get; set; }
         public Doctor Doctor { get; set; }
+        public int? DoctorId { get; set; }
         public string RecurrenceRule { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MoreHealth.Models;
 using MoreHealth.ViewModels.Account;
 
 namespace MoreHealth.ViewModels.Mappings
@@ -8,96 +7,53 @@ namespace MoreHealth.ViewModels.Mappings
     {
         public UserMappingProfile()
         {
-            CreateMap<DepartmentViewModel, Department>()
-                .ForMember(dest => dest.Id,
-                    opt => opt.MapFrom
-                        (src => src.Id))
-                .ForMember(dest => dest.DepartmentName,
-                    opt => opt.MapFrom
-                        (src => src.DepartmentName))
-                .ForMember(dest => dest.Specializations,
-                    opt => opt.Ignore()).ReverseMap();
-
-            CreateMap<SpecializationViewModel, Specialization>()
-                .ForMember(dest => dest.Id,
-                    opt => opt.MapFrom
-                        (src => src.Id))
-                .ForMember(dest => dest.SpecializationName,
-                    opt => opt.MapFrom
-                        (src => src.SpecializationName))
-                .ForMember(dest => dest.Doctors,
-                    opt => opt.Ignore())
-                .ForMember(dest => dest.Department,
-                    opt => opt.Ignore()).ReverseMap();
-
-            CreateMap<AppointmentHomeViewModel, AppointmentHome>()
-                .ForMember(dest => dest.Id,
-                    opt => opt.MapFrom
-                        (src => src.Id))
-                .ForMember(x => x.PatientId, opt => opt.MapFrom(x => x.PatientId))
-                .ForMember(dest => dest.Address,
-                    opt => opt.MapFrom
-                        (src => src.Address))
-                .ForMember(dest => dest.Patient,
-                    opt => opt.Ignore())
-                .ForMember(dest => dest.Date,
-                    opt => opt.MapFrom(x => x.Date)).ReverseMap();
-
-            CreateMap<FeedbackViewModel, Feedback>()
-                .ForMember(dest => dest.Id,
-                    opt => opt.MapFrom
-                        (src => src.Id))
-                .ForMember(x => x.PatientId, opt => opt.MapFrom(x => x.PatientId))
-                .ForMember(dest => dest.Patient,
-                    opt => opt.Ignore())
-                .ForMember(dest => dest.Doctor,
-                    opt => opt.Ignore())
-                .ForMember(x => x.DoctorId, opt => opt.MapFrom(x => x.DoctorId))
-                .ForMember(dest => dest.IsLike,
-                    opt => opt.MapFrom(x => x.IsLike))
-                .ForMember(dest => dest.Text,
-                    opt => opt.MapFrom(x => x.Text)).ReverseMap();
-
-            CreateMap<AppointmentViewModel, Appointment>()
-                .ForMember(x => x.Address,
-                    opt => opt.MapFrom(src => src.Address))
-                .ForMember(x => x.PatientId,
-                    opt => opt.MapFrom(src => src.PatientId))
-                .ForMember(x => x.DateStart,
-                    opt => opt.MapFrom(src => src.DateStart))
-                .ForMember(x => x.DateEnd,
-                    opt => opt.MapFrom(src => src.DateEnd))
-                .ForMember(x => x.Doctor,
-                    opt => opt.MapFrom(src => src.Doctor))
-                .ForMember(x => x.Id,
-                    opt => opt.MapFrom(src => src.Id))
-                .ForMember(x => x.Patient,
-                    opt => opt.Ignore()).ReverseMap();
-            CreateMap<DoctorViewModel, Doctor>()
-                .ForMember(dest => dest.Id,
-                    opt => opt.MapFrom
-                        (src => src.Id))
-                .ForMember(dest => dest.User,
-                    opt => opt.MapFrom
-                        (src => src.User))
-                .ForMember(dest => dest.Specialization,
-                    opt => opt.MapFrom
-                        (src => src.Specialization))
-                .ForMember(dest => dest.Name,
-                    opt => opt.MapFrom
-                        (src => src.Name))
-                .ForMember(dest => dest.Surname,
-                    opt => opt.MapFrom
-                        (src => src.Surname))
-                .ForMember(dest => dest.LastName,
-                    opt => opt.MapFrom
-                        (src => src.LastName))
-                .ForMember(dest => dest.Feedbacks,
-                    opt => opt.Ignore())
-                .ForMember(dest => dest.Cabinet,
-                    opt => opt.Ignore())
-                .ForMember(dest => dest.WorkSchedules,
-                    opt => opt.Ignore()).ReverseMap();
+            CreateMap<DepartmentViewModel, Models.Department>()
+                .ForMember(d => d.Id, opt => opt.MapFrom(dvm => dvm.Id))
+                .ForMember(d => d.DepartmentName, opt => opt.MapFrom(dvm => dvm.DepartmentName))
+                .ForMember(d => d.Specializations, opt => opt.Ignore()).ReverseMap();
+            CreateMap<SpecializationViewModel, Models.Specialization>()
+                .ForMember(s => s.Id, opt => opt.MapFrom(svm => svm.Id))
+                .ForMember(s => s.SpecializationName, opt => opt.MapFrom(svm => svm.SpecializationName))
+                .ForMember(s => s.Doctors, opt => opt.Ignore())
+                .ForMember(s => s.Department, opt => opt.Ignore()).ReverseMap();
+            CreateMap<AppointmentHomeViewModel, Models.AppointmentHome>()
+                .ForMember(ah => ah.Id, opt => opt.MapFrom(ahvm => ahvm.Id))
+                .ForMember(ah => ah.PatientId, opt => opt.MapFrom(ahvm => ahvm.PatientId))
+                .ForMember(ah => ah.Address, opt => opt.MapFrom(ahvm => ahvm.Address))
+                .ForMember(ah => ah.Patient,  opt => opt.Ignore())
+                .ForMember(ah => ah.Date, opt => opt.MapFrom(ahvm => ahvm.Date)).ReverseMap();
+            CreateMap<FeedbackViewModel, Models.Feedback>()
+                .ForMember(f => f.Id, opt => opt.MapFrom(fvm => fvm.Id))
+                .ForMember(f => f.PatientId, opt => opt.MapFrom(fvm => fvm.PatientId))
+                .ForMember(f => f.Patient, opt => opt.Ignore())
+                .ForMember(f => f.Doctor, opt => opt.Ignore())
+                .ForMember(f => f.DoctorId, opt => opt.MapFrom(fvm => fvm.DoctorId))
+                .ForMember(f => f.IsLike, opt => opt.MapFrom(fvm => fvm.IsLike))
+                .ForMember(f => f.Text, opt => opt.MapFrom(fvm => fvm.Text)).ReverseMap();
+            CreateMap<AppointmentViewModel, Models.Appointment>()
+                .ForMember(a => a.Address, opt => opt.MapFrom(avm => avm.Address))
+                .ForMember(a => a.PatientId, opt => opt.MapFrom(avm => avm.PatientId))
+                .ForMember(a => a.DateStart, opt => opt.MapFrom(avm => avm.DateStart))
+                .ForMember(a => a.DateEnd, opt => opt.MapFrom(avm => avm.DateEnd))
+                .ForMember(a => a.Doctor,opt => opt.MapFrom(avm => avm.Doctor))
+                .ForMember(a => a.Id, opt => opt.MapFrom(avm => avm.Id))
+                .ForMember(a => a.Patient, opt => opt.Ignore()).ReverseMap();
+            CreateMap<DoctorViewModel, Models.Doctor>()
+                .ForMember(d => d.Id, opt => opt.MapFrom(dvm => dvm.Id))
+                .ForMember(d => d.User, opt => opt.MapFrom(dvm => dvm.User))
+                .ForMember(d => d.Specialization, opt => opt.MapFrom(dvm => dvm.Specialization))
+                .ForMember(d => d.Name, opt => opt.MapFrom(dvm => dvm.Name))
+                .ForMember(d => d.Surname, opt => opt.MapFrom(dvm => dvm.Surname))
+                .ForMember(d => d.LastName, opt => opt.MapFrom(dvm => dvm.LastName))
+                .ForMember(d => d.Feedbacks, opt => opt.Ignore())
+                .ForMember(d => d.Cabinet, opt => opt.Ignore())
+                .ForMember(d => d.WorkSchedules, opt => opt.Ignore()).ReverseMap();
+            CreateMap<WorkScheduleViewModel, Models.WorkSchedule>()
+                .ForMember(ws => ws.DoctorId, opt => opt.MapFrom(wsvm => wsvm.DoctorId))
+                .ForMember(ws => ws.RecurrenceRule, opt => opt.MapFrom(wsvm => wsvm.RecurrenceRule))
+                .ForMember(ws => ws.StartDate, opt => opt.MapFrom(wsvm => wsvm.StartDate))
+                .ForMember(ws => ws.EndDate, opt => opt.MapFrom(wsvm => wsvm.EndDate))
+                .ForMember(ws => ws.Doctor, opt => opt.Ignore()).ReverseMap();
         }
     }
 }
