@@ -11,6 +11,18 @@ namespace MoreHealth.ViewModels.Mappings
                 .ForMember(d => d.Id, opt => opt.MapFrom(dvm => dvm.Id))
                 .ForMember(d => d.DepartmentName, opt => opt.MapFrom(dvm => dvm.DepartmentName))
                 .ForMember(d => d.Specializations, opt => opt.Ignore()).ReverseMap();
+            CreateMap<PatientViewModel, Models.Patient>()
+                .ForMember(p => p.Id, opt => opt.MapFrom(pvm => pvm.Id))
+                .ForMember(p => p.Address, opt => opt.MapFrom(pvm => pvm.Address))
+                .ForMember(p => p.IsPatient, opt => opt.MapFrom(pvm => pvm.IsPatient))
+                .ForMember(p => p.Name, opt => opt.MapFrom(pvm => pvm.Name))
+                .ForMember(p => p.LastName, opt => opt.MapFrom(pvm => pvm.LastName))
+                .ForMember(p => p.Surname, opt => opt.MapFrom(pvm => pvm.Surname))
+                .ForMember(p => p.DateBirth, opt => opt.MapFrom(pvm => pvm.DateBirth)).ReverseMap();
+            CreateMap<CabinetViewModel, Models.Cabinet>()
+                .ForMember(d => d.Id, opt => opt.MapFrom(dvm => dvm.Id))
+                .ForMember(d => d.CabinetNumber, opt => opt.MapFrom(dvm => dvm.CabinetNumber))
+                .ForMember(d => d.Doctors, opt => opt.Ignore()).ReverseMap();
             CreateMap<SpecializationViewModel, Models.Specialization>()
                 .ForMember(s => s.Id, opt => opt.MapFrom(svm => svm.Id))
                 .ForMember(s => s.SpecializationName, opt => opt.MapFrom(svm => svm.SpecializationName))

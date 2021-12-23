@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MoreHealth.Constants.UserMessagesConstants
+﻿namespace MoreHealth.Constants.UserMessagesConstants
 {
     public static class UserMessagesConstants
     {
@@ -21,5 +16,7 @@ namespace MoreHealth.Constants.UserMessagesConstants
         public static string FeedBackAdded = "Отзыв добавлен!";
 
         public static string FeedBackDontAdded = "Отзыв не удалось добавить.";
+        public static string UpdateCabinetSuccess = "Кабинет обновлен!";
+        public static string UpdateCabinetFailed = "Кабинет не удалось обновить.";
     }
 }

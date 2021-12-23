@@ -1,0 +1,68 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div id="grid"> </div>
+<script>
+    $("#grid").kendoGrid({
+                dataSource: {
+                    transport: {
+                        read: "@Url.Action("GetAllCabinets", "Admin")",
+                        update: {
+                            url: "@Url.Action("UpdateCabinet","Admin")",
+                            dataType: "json",
+                            type: "POST"
+                        },
+                        create:{
+                            url: "@Url.Action("CreateCabinet", "Admin")",
+                            dataType: "json",
+                            type: "POST"
+                        },
+                        destroy: {
+                            url: "@Url.Action("RemoveCabinet", "Admin")",
+                            dataType: "json",
+                            type: "DELETE"
+                        }
+                    },
+                    schema: {
+                        model: {
+                            id: "Id",
+                            fields: {
+                                Id: {
+                                    from: "id", type: "number", editable: false},
+                                CabinetNumber: { from: "cabinetNumber"},
+                            }
+                        }
+                    },
+                    pageSize: 20,
+                    serverPaging: true,
+                    serverFiltering: true,
+                    serverSorting: true
+                },
+                height: 550,
+                editable: "popup",
+                // filterable: true,
+                // sortable: true,
+                pageable: true,
+                toolbar: [
+                    {name: "create"}
+                ],
+                columns: [
+                    {
+                        field:"Id",
+                        filterable: false
+                    },
+                    {
+                        field: "CabinetNumber",
+                        title: "Номер кабинета"
+                    },
+                    {
+                        command: ["edit"]
+                    },
+                    {
+                        command: "destroy"
+                    }
+                ]
+            });
+</script>

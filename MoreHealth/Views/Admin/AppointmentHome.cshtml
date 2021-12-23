@@ -1,0 +1,84 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div id="grid"> </div>
+<script>
+    $("#grid").kendoGrid({
+                dataSource: {
+                    transport: {
+                        read: "@Url.Action("GetAllAppointmentHome", "Admin")",
+                        destroy: {
+                            url: "@Url.Action("RemoveAppointmentHome", "Admin")",
+                            dataType: "json",
+                            type: "POST"
+                        }
+                    },
+                    schema: {
+                        model: {
+                            id: "Id",
+                            fields: {
+                                Id: {from: "id", type: "number", editable: false},
+                                Patient: { from: "patient", editable: false },
+                                PatientId: { from: "patientId" },
+                                Address: { from: "address" },
+                                Date: { from: "date" }
+
+                            }
+                        }
+                    },
+                    pageSize: 20,
+                    serverPaging: true,
+                    serverFiltering: true,
+                    serverSorting: true
+                },
+                height: 550,
+                editable: "popup",
+                toolbar: [
+                    {name: "excel"}
+                ],
+                excel: {
+                    fileName: "Kendo UI Grid Export.xlsx",
+                    filterable: true,
+                    allPages: true
+                },
+                // filterable: true,
+                // sortable: true,
+                pageable: true,
+                columns: [
+                    {
+                        field:"Id",
+                        filterable: false
+                    },
+                    {
+                        field: "Patient.name",
+                        title: "Имя"
+                    },
+                    {
+                        field: "Patient.surname",
+                        title: "Фамилия"
+                    },
+                    {
+                        field: "Patient.lastName",
+                        title: "Отчество"
+                    },
+                    {
+                        field: "Patient.isPatient",
+                        title: "Клиент поликлиники"
+                    },
+                    {
+                        field: "Patient.address",
+                        title: "Адрес"
+                    },
+                    {
+                        field: "Patient.dateBirth",
+                        title: "Дата рождения",
+                        template: "#= kendo.toString(kendo.parseDate(Patient.dateBirth, 'yyyy-MM-dd'), 'MM/dd/yyyy') #"
+                    },
+                    {
+                        command: "destroy"
+                    }
+                ]
+            });
+</script>
