@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using MoreHealth.Models;
-
-namespace MoreHealth.ViewModels.Account
+﻿namespace MoreHealth.ViewModels
 {
     public class DepartmentViewModel
     {

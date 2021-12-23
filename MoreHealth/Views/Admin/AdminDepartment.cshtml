@@ -1,0 +1,74 @@
+﻿<nav>
+    <div class="nav nav-tabs mb-5 d-flex justify-content-center" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link"  asp-action="AdminPanel" aria-controls="nav-home" aria-selected="false">Админ панель</a>
+        <a class="nav-item nav-link"  asp-action="AdminAppointmentHome" aria-controls="nav-profile" aria-selected="false">Вызов на дом</a>
+        <a class="nav-item nav-link active"  asp-action="AdminDepartment" aria-controls="nav-contact" aria-selected="false">Департамент</a>
+        <a class="nav-item nav-link"  asp-action="AdminCabinet" aria-controls="nav-contact" aria-selected="false">Кабинет</a>
+        <a class="nav-item nav-link"  asp-action="AdminDoctor" aria-controls="nav-contact" aria-selected="false">Доктор</a>
+        <a class="nav-item nav-link"  asp-action="AdminFeedback" aria-controls="nav-contact" aria-selected="false">Отзывы</a>
+        <a class="nav-item nav-link"  asp-action="AdminPaidService" aria-controls="nav-contact" aria-selected="false">Платные услуги</a>
+        <a class="nav-item nav-link"  asp-action="AdminSpecialization" aria-controls="nav-contact" aria-selected="false">Специальности</a>
+    </div>
+</nav>
+<div id="grid"> </div>
+<script>
+    $("#grid").kendoGrid({
+                dataSource: {
+                    transport: {
+                        read: "@Url.Action("GetAllDepartments", "Admin")",
+                        update: {
+                            url: "@Url.Action("UpdateDepartment","Admin")",
+                            dataType: "json",
+                            type: "POST"
+                        },
+                        create:{
+                            url: "@Url.Action("CreateDepartment", "Admin")",
+                            dataType: "json",
+                            type: "POST"
+                        },
+                        destroy: {
+                            url: "@Url.Action("RemoveDepartment", "Admin")",
+                            dataType: "json",
+                            type: "DELETE"
+                        }
+                    },
+                    schema: {
+                        model: {
+                            id: "Id",
+                            fields: {
+                                Id: { from: "id", type: "number", editable: false},
+                                DepartmentName: { from: "departmentName", validation: {required: true }},
+                            }
+                        }
+                    },
+                    pageSize: 20,
+                    serverPaging: true,
+                    serverFiltering: true,
+                    serverSorting: true
+                },
+                height: 550,
+                editable: "popup",
+                // filterable: true,
+                // sortable: true,
+                pageable: true,
+                toolbar: [
+                    {name: "create"}
+                ],
+                columns: [
+                    {
+                        field:"Id",
+                        filterable: false
+                    },
+                    {
+                        field: "DepartmentName",
+                        title: "Название департамента"
+                    },
+                    {
+                        command: ["edit"]
+                    },
+                    {
+                        command: "destroy"
+                    }
+                ]
+            });
+</script>

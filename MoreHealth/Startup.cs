@@ -46,6 +46,11 @@ namespace MoreHealth
             services.AddScoped<IPaidServicesService, PaidServicesService>();
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IAdminService, AdminService>();
+            
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
 
             services.AddDbContext<ApplicationContext>(
                 options =>

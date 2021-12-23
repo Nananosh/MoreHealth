@@ -167,3 +167,16 @@ F:\Education\More\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\PaidService
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Schedule\Index.cshtml.g.cs
 F:\Education\More\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Schedule\Index.cshtml.g.cs
 F:\Education\More\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Appointment\Index.cshtml.g.cs
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Admin\AdminAppointmentHome.cshtml.g.cs
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Admin\AdminCabinet.cshtml.g.cs
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Admin\AdminDepartment.cshtml.g.cs
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Appointment\Index.cshtml.g.cs
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Admin\AdminSpecialization.cshtml.g.cs
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Admin\AdminPaidService.cshtml.g.cs
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Admin\AdminDoctor.cshtml.g.cs
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Admin\AdminFeedback.cshtml.g.cs
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Admin\AdminPanel.cshtml.g.cs
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Account\RegisterDoctor.cshtml.g.cs

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace MoreHealth.Models
 {
@@ -6,6 +7,7 @@ namespace MoreHealth.Models
     {
         public int Id { get; set; }
         public string DepartmentName { get; set; }
+        [JsonIgnore]
         public List<Specialization> Specializations { get; set; }
     }
 }

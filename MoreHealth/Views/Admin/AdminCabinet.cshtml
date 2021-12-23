@@ -1,8 +1,15 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<nav>
+    <div class="nav nav-tabs mb-5 d-flex justify-content-center" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link"  asp-action="AdminPanel" aria-controls="nav-home" aria-selected="false">Админ панель</a>
+        <a class="nav-item nav-link"  asp-action="AdminAppointmentHome" aria-controls="nav-profile" aria-selected="false">Вызов на дом</a>
+        <a class="nav-item nav-link"  asp-action="AdminDepartment" aria-controls="nav-contact" aria-selected="false">Департамент</a>
+        <a class="nav-item nav-link active"  asp-action="AdminCabinet" aria-controls="nav-contact" aria-selected="false">Кабинет</a>
+        <a class="nav-item nav-link"  asp-action="AdminDoctor" aria-controls="nav-contact" aria-selected="false">Доктор</a>
+        <a class="nav-item nav-link"  asp-action="AdminFeedback" aria-controls="nav-contact" aria-selected="false">Отзывы</a>
+        <a class="nav-item nav-link"  asp-action="AdminPaidService" aria-controls="nav-contact" aria-selected="false">Платные услуги</a>
+        <a class="nav-item nav-link"  asp-action="AdminSpecialization" aria-controls="nav-contact" aria-selected="false">Специальности</a>
+    </div>
+</nav>
 <div id="grid"> </div>
 <script>
     $("#grid").kendoGrid({

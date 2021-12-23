@@ -1,0 +1,150 @@
+﻿<nav>
+    <div class="nav nav-tabs mb-5 d-flex justify-content-center" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link"  asp-action="AdminPanel" aria-controls="nav-home" aria-selected="false">Админ панель</a>
+        <a class="nav-item nav-link"  asp-action="AdminAppointmentHome" aria-controls="nav-profile" aria-selected="false">Вызов на дом</a>
+        <a class="nav-item nav-link"  asp-action="AdminDepartment" aria-controls="nav-contact" aria-selected="false">Департамент</a>
+        <a class="nav-item nav-link"  asp-action="AdminCabinet" aria-controls="nav-contact" aria-selected="false">Кабинет</a>
+        <a class="nav-item nav-link active"  asp-action="AdminDoctor" aria-controls="nav-contact" aria-selected="false">Доктор</a>
+        <a class="nav-item nav-link"  asp-action="AdminFeedback" aria-controls="nav-contact" aria-selected="false">Отзывы</a>
+        <a class="nav-item nav-link"  asp-action="AdminPaidService" aria-controls="nav-contact" aria-selected="false">Платные услуги</a>
+        <a class="nav-item nav-link"  asp-action="AdminSpecialization" aria-controls="nav-contact" aria-selected="false">Специальности</a>
+    </div>
+</nav>
+<div id="example">
+    <div id="grid"></div>
+    <script>
+        $(document).ready(function() {
+            $("#grid").kendoGrid({
+                dataSource: {
+                    transport: {
+                        read: "@Url.Action("GetAllDoctors", "Admin")",
+                        update: {
+                            url: "@Url.Action("UpdateDoctor","Admin")",
+                            dataType: "json",
+                            type: "POST"
+                        },
+                        destroy: {
+                            url: "@Url.Action("RemoveDoctor","Admin")",
+                            dataType: "json",
+                            type: "DELETE"
+                        }
+                    },
+                    schema: {
+                        model: {
+                            id: "Id",
+                            fields: {
+                                Id: { editable: false, from: "id", type: "number" },
+                                Specialization: { from: "specialization",nullable: true, validation: {required: true} }, 
+                                SpecializationId: {from: "specializationId",nullable: true, validation: {required: true} },
+                                Cabinet: { from: "cabinet",nullable: true, validation: {required: true} },
+                                CabinetId: {from: "cabinetId",nullable: true, validation: {required: true} }, 
+                                Name: { from: "name", validation: {required: true} },
+                                Surname: {from: "surname", validation: {required: true} }, 
+                                LastName: { from: "lastName", validation: {required: true }}
+                            }
+                        }
+                    },
+                    pageSize: 20,
+                    serverPaging: true,
+                    serverFiltering: true,
+                    serverSorting: true
+                },
+                height: 550,
+                editable: {
+                    mode: "popup",
+                    window: {
+                        scrollable: false,
+                        resizable: false,
+                    }
+                },
+                // filterable: true,
+                // sortable: true,
+                pageable: true,
+                columns: [
+                    {
+                        field:"Id",
+                        filterable: false
+                    },
+                    {
+                        field: "Specialization.specializationName",
+                        title: "Специальность",
+                        editor: specializationEditor,
+                        template: function(dataItem) {
+                            if (dataItem.Specialization == null)
+                                return '';
+                            else
+                                return dataItem.Specialization.specializationName;
+                        }
+                    },
+                    {
+                        field: "Cabinet.cabinetNumber",
+                        title: "Кабинет",
+                        editor: cabinetEditor,
+                        template: function(dataItem) {
+                            if (dataItem.Cabinet == null)
+                                return '';
+                            else
+                                return dataItem.Cabinet.cabinetNumber;
+                        }
+                    }, 
+                    {
+                        field: "Name",
+                        title: "Имя"
+                    }, 
+                    {
+                        field: "Surname",
+                        title: "Фамилия"
+                    },
+                    {
+                        field: "LastName",
+                        title: "Отчество"  
+                    },
+                    {
+                        command: "edit", 
+                    },
+                    {
+                        command: "destroy"
+                    }
+                ]
+            });
+        });
+        
+        function specializationEditor(container, options) {
+            $('<input required name="SpecializationId">')
+                .appendTo(container)
+                .kendoDropDownList({
+                    dataTextField: "specializationName",
+                    dataValueField: "id",
+                    height: 500,
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: "@Url.Action("GetAllSpecializations", "Admin")",
+                                dataType: "json",
+                                cache: false
+                            }
+                        }
+                    }
+                });
+        }
+        
+        function cabinetEditor(container, options) {
+            $('<input required name="CabinetId">')
+                .appendTo(container)
+                .kendoDropDownList({
+                    dataTextField: "cabinetNumber",
+                    dataValueField: "id",
+                    height: 500,
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: "@Url.Action("GetAllCabinets", "Admin")",
+                                dataType: "json",
+                                cache: false
+                            }
+                        }
+                    }
+                });
+        }
+    </script>
+</div>

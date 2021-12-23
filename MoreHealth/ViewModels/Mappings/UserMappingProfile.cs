@@ -27,7 +27,9 @@ namespace MoreHealth.ViewModels.Mappings
                 .ForMember(s => s.Id, opt => opt.MapFrom(svm => svm.Id))
                 .ForMember(s => s.SpecializationName, opt => opt.MapFrom(svm => svm.SpecializationName))
                 .ForMember(s => s.Doctors, opt => opt.Ignore())
-                .ForMember(s => s.Department, opt => opt.Ignore()).ReverseMap();
+                .ForMember(s => s.Department, opt => opt.MapFrom(svm => svm.Department))
+                .ForMember(s => s.DepartmentId, opt => opt.MapFrom(svm => svm.DepartmentId)).ReverseMap();
+
             CreateMap<AppointmentHomeViewModel, Models.AppointmentHome>()
                 .ForMember(ah => ah.Id, opt => opt.MapFrom(ahvm => ahvm.Id))
                 .ForMember(ah => ah.PatientId, opt => opt.MapFrom(ahvm => ahvm.PatientId))
@@ -54,11 +56,13 @@ namespace MoreHealth.ViewModels.Mappings
                 .ForMember(d => d.Id, opt => opt.MapFrom(dvm => dvm.Id))
                 .ForMember(d => d.User, opt => opt.MapFrom(dvm => dvm.User))
                 .ForMember(d => d.Specialization, opt => opt.MapFrom(dvm => dvm.Specialization))
+                .ForMember(d => d.SpecializationId, opt => opt.MapFrom(dvm => dvm.SpecializationId))
                 .ForMember(d => d.Name, opt => opt.MapFrom(dvm => dvm.Name))
                 .ForMember(d => d.Surname, opt => opt.MapFrom(dvm => dvm.Surname))
                 .ForMember(d => d.LastName, opt => opt.MapFrom(dvm => dvm.LastName))
                 .ForMember(d => d.Feedbacks, opt => opt.Ignore())
-                .ForMember(d => d.Cabinet, opt => opt.Ignore())
+                .ForMember(d => d.Cabinet, opt => opt.MapFrom(dvm => dvm.Cabinet))
+                .ForMember(d => d.CabinetId, opt => opt.MapFrom(dvm => dvm.CabinetId))
                 .ForMember(d => d.WorkSchedules, opt => opt.Ignore()).ReverseMap();
             CreateMap<WorkScheduleViewModel, Models.WorkSchedule>()
                 .ForMember(ws => ws.DoctorId, opt => opt.MapFrom(wsvm => wsvm.DoctorId))
@@ -66,6 +70,11 @@ namespace MoreHealth.ViewModels.Mappings
                 .ForMember(ws => ws.StartDate, opt => opt.MapFrom(wsvm => wsvm.StartDate))
                 .ForMember(ws => ws.EndDate, opt => opt.MapFrom(wsvm => wsvm.EndDate))
                 .ForMember(ws => ws.Doctor, opt => opt.Ignore()).ReverseMap();
+            CreateMap<PaidServiceViewModel, Models.PaidServices>()
+                .ForMember(ws => ws.Description, opt => opt.MapFrom(wsvm => wsvm.Description))
+                .ForMember(ws => ws.Price, opt => opt.MapFrom(wsvm => wsvm.Price))
+                .ForMember(ws => ws.ForeignPrice, opt => opt.MapFrom(wsvm => wsvm.ForeignPrice))
+                .ForMember(ws => ws.ServiceName, opt => opt.MapFrom(wsvm => wsvm.ServiceName)).ReverseMap();
         }
     }
 }
