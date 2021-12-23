@@ -77,7 +77,7 @@ namespace MoreHealth.Business.Services
             }
         }
 
-        public string RemoveAppointmentHome(AppointmentHomeViewModel model)
+        public void RemoveAppointmentHome(AppointmentHome model)
         {
             var appointmentHome = db.AppointmentHomes.FirstOrDefault(ah => ah.Id == model.Id);
 
@@ -85,11 +85,7 @@ namespace MoreHealth.Business.Services
             {
                 db.AppointmentHomes.Remove(appointmentHome);
                 db.SaveChanges();
-
-                return "Успех";
             }
-
-            return "Не успех";
         }
     }
 }

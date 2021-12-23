@@ -14,7 +14,7 @@ namespace MoreHealth.Business.Interfaces
         Cabinet UpdateCabinet(Cabinet model);
         Cabinet CreateCabinet(Cabinet model);
         void RemoveCabinet(Cabinet model);
-        string RemoveAppointmentHome(AppointmentHomeViewModel model);
+        void RemoveAppointmentHome(AppointmentHome model);
 
     }
 }

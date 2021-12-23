@@ -72,11 +72,10 @@ namespace MoreHealth.Controllers
             adminService.RemoveCabinet(mapper.Map<Cabinet>(model));
         }
 
-        public IActionResult RemoveAppointmentHome(AppointmentHomeViewModel model)
+        [HttpDelete]
+        public void RemoveAppointmentHome(AppointmentHomeViewModel model)
         {
-            var messageToUser = adminService.RemoveAppointmentHome(model);
-
-            return Content(messageToUser);
+            adminService.RemoveAppointmentHome(mapper.Map<AppointmentHome>(model));
         }
     }
 }
