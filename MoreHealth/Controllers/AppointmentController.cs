@@ -69,5 +69,47 @@ namespace MoreHealth.Controllers
             
             return Json(mapper.Map<IEnumerable<AppointmentViewModel>>(talons));
         }
+        
+        public IActionResult AddAppointmentByDoctor(int id)
+        {
+            ViewBag.Id = id;
+            return View();
+        }
+        
+        public IActionResult AppointmentByDoctor(string id)
+        {
+            var doctorId = doctorOrPatientService.GetDoctorByUserId(db,id);
+            ViewBag.Id = doctorId;
+            return View();
+        }
+        
+        public IActionResult GetTalonsByDoctorId(int id)
+        {
+            var talons = appointmentService.GetTalonsByDoctorId(db, id);
+            
+            return Json(mapper.Map<IEnumerable<AppointmentViewModel>>(talons));
+        }
+        
+        [HttpPost]
+        public JsonResult AddDoctorTalon(AppointmentViewModel model)
+        {
+            var talon = appointmentService.AddDoctorTalon(db, mapper.Map<Appointment>(model));
+
+            return Json(mapper.Map<AppointmentViewModel>(talon));
+        }
+        
+        [HttpPost]
+        public JsonResult EditDoctorTalon(AppointmentViewModel model)
+        {
+            var talon = appointmentService.EditDoctorTalon(db, mapper.Map<Appointment>(model));
+
+            return Json(mapper.Map<AppointmentViewModel>(talon));
+        }
+        
+        [HttpDelete]
+        public void DeleteDoctorTalon(AppointmentViewModel model)
+        {
+            appointmentService.DeleteDoctorTalon(db, mapper.Map<Appointment>(model)); ;
+        }
     }
 }

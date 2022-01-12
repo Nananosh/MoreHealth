@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace MoreHealth.Models
@@ -16,7 +17,10 @@ namespace MoreHealth.Models
         public List<Feedback> Feedbacks { get; set; }
         public Cabinet? Cabinet { get; set; }
         public int? CabinetId { get; set; }
-        [JsonIgnore]
-        public List<WorkSchedule> WorkSchedules { get; set; }
+        public DateTime StartWorkTimeEvenDay { get; set; }
+        public DateTime EndWorkTimeEvenDay { get; set; }
+        public DateTime StartWorkTimeOddDay { get; set; }
+        public DateTime EndWorkTimeOddDay { get; set; }
+        public string Weekend { get; set; }
     }
 }

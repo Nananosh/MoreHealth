@@ -7,13 +7,13 @@
     <title>@ViewData["Title"] - MoreHealth</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css"/>
-    
+
     <link rel="stylesheet" href="~/lib/Kendo/styles/kendo.common.min.css"/>
     <link rel="stylesheet" href="~/lib/Kendo/styles/kendo.bootstrap-vintage.min.css"/>
     <script src="~/lib/Kendo/js/jquery.min.js"></script>
     <script src="~/lib/Kendo/js/kendo.all.min.js"></script>
     <script src="~/lib/Kendo/js/kendo.timezones.min.js"></script>
-    <script src="~/lib/Kendo/js/cultures/kendo.culture.ru.min.js"></script>
+    <script src="~/lib/Kendo/js/cultures/kendo.culture.ru-RU.min.js"></script>
     <script src="~/lib/Kendo/js/messages/kendo.messages.ru-RU.min.js"></script>
 
 </head>
@@ -53,11 +53,14 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" asp-route-id="@User.Claims.ElementAt(0).Value">@User.Claims.ElementAt(1).Value</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" asp-controller="Admin" asp-action="AdminPanel">Админка</a>
-                                @* @if (User.IsInRole("Admin")) *@
-                                @* { *@
-                                @*      *@
-                                @* } *@
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a class="dropdown-item" asp-controller="Admin" asp-action="AdminPanel">Админка</a>
+                                }
+                                @if (User.IsInRole("Doctor"))
+                                {
+                                    <a class="dropdown-item" asp-controller="Appointment" asp-action="AppointmentByDoctor" asp-route-id="@User.Claims.ElementAt(0).Value">Талоны</a>
+                                }
                                 <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Выход</a>
                             </div>
                         </li>

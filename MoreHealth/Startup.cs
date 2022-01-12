@@ -46,6 +46,7 @@ namespace MoreHealth
             services.AddScoped<IPaidServicesService, PaidServicesService>();
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IAdminService, AdminService>();
+            services.AddScoped<ISeedDatabaseService, SeedDatabaseService>();
             
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>

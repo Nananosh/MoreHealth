@@ -10,8 +10,8 @@ using MoreHealth.Models;
 namespace MoreHealth.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20211208193503_EditScheduleInDataBase")]
-    partial class EditScheduleInDataBase
+    [Migration("20220112142136_CreateDatabase")]
+    partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,21 +20,6 @@ namespace MoreHealth.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("CabinetDoctor", b =>
-                {
-                    b.Property<int>("CabinetsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DoctorsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CabinetsId", "DoctorsId");
-
-                    b.HasIndex("DoctorsId");
-
-                    b.ToTable("CabinetDoctor");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -177,30 +162,48 @@ namespace MoreHealth.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CabinetId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("DateEnd")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("DateStart")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("DoctorId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsHome")
-                        .HasColumnType("bit");
 
                     b.Property<int?>("PatientId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CabinetId");
-
                     b.HasIndex("DoctorId");
 
                     b.HasIndex("PatientId");
 
                     b.ToTable("Appointments");
+                });
+
+            modelBuilder.Entity("MoreHealth.Models.AppointmentHome", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("PatientId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("AppointmentHomes");
                 });
 
             modelBuilder.Entity("MoreHealth.Models.Cabinet", b =>
@@ -240,6 +243,15 @@ namespace MoreHealth.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CabinetId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndWorkTimeEvenDay")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EndWorkTimeOddDay")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -249,13 +261,24 @@ namespace MoreHealth.Migrations
                     b.Property<int?>("SpecializationId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("StartWorkTimeEvenDay")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartWorkTimeOddDay")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Weekend")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CabinetId");
 
                     b.HasIndex("SpecializationId");
 
@@ -271,13 +294,13 @@ namespace MoreHealth.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DoctorId")
+                    b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsLike")
                         .HasColumnType("bit");
 
-                    b.Property<int>("PatientId")
+                    b.Property<int?>("PatientId")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -358,7 +381,7 @@ namespace MoreHealth.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("DepartmentId")
+                    b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("SpecializationName")
@@ -439,47 +462,6 @@ namespace MoreHealth.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("MoreHealth.Models.WorkSchedule", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("DoctorId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("RecurrenceRule")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.ToTable("WorkSchedule");
-                });
-
-            modelBuilder.Entity("CabinetDoctor", b =>
-                {
-                    b.HasOne("MoreHealth.Models.Cabinet", null)
-                        .WithMany()
-                        .HasForeignKey("CabinetsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MoreHealth.Models.Doctor", null)
-                        .WithMany()
-                        .HasForeignKey("DoctorsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -533,10 +515,6 @@ namespace MoreHealth.Migrations
 
             modelBuilder.Entity("MoreHealth.Models.Appointment", b =>
                 {
-                    b.HasOne("MoreHealth.Models.Cabinet", "Cabinet")
-                        .WithMany()
-                        .HasForeignKey("CabinetId");
-
                     b.HasOne("MoreHealth.Models.Doctor", "Doctor")
                         .WithMany()
                         .HasForeignKey("DoctorId");
@@ -545,15 +523,26 @@ namespace MoreHealth.Migrations
                         .WithMany()
                         .HasForeignKey("PatientId");
 
-                    b.Navigation("Cabinet");
-
                     b.Navigation("Doctor");
+
+                    b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("MoreHealth.Models.AppointmentHome", b =>
+                {
+                    b.HasOne("MoreHealth.Models.Patient", "Patient")
+                        .WithMany("AppointmentHomes")
+                        .HasForeignKey("PatientId");
 
                     b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("MoreHealth.Models.Doctor", b =>
                 {
+                    b.HasOne("MoreHealth.Models.Cabinet", "Cabinet")
+                        .WithMany("Doctors")
+                        .HasForeignKey("CabinetId");
+
                     b.HasOne("MoreHealth.Models.Specialization", "Specialization")
                         .WithMany("Doctors")
                         .HasForeignKey("SpecializationId");
@@ -561,6 +550,8 @@ namespace MoreHealth.Migrations
                     b.HasOne("MoreHealth.Models.User", "User")
                         .WithMany("Doctors")
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Cabinet");
 
                     b.Navigation("Specialization");
 
@@ -571,15 +562,11 @@ namespace MoreHealth.Migrations
                 {
                     b.HasOne("MoreHealth.Models.Doctor", "Doctor")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DoctorId");
 
                     b.HasOne("MoreHealth.Models.Patient", "Patient")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PatientId");
 
                     b.Navigation("Doctor");
 
@@ -599,18 +586,16 @@ namespace MoreHealth.Migrations
                 {
                     b.HasOne("MoreHealth.Models.Department", "Department")
                         .WithMany("Specializations")
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("MoreHealth.Models.WorkSchedule", b =>
+            modelBuilder.Entity("MoreHealth.Models.Cabinet", b =>
                 {
-                    b.HasOne("MoreHealth.Models.Doctor", "Doctor")
-                        .WithMany("WorkSchedules")
-                        .HasForeignKey("DoctorId");
-
-                    b.Navigation("Doctor");
+                    b.Navigation("Doctors");
                 });
 
             modelBuilder.Entity("MoreHealth.Models.Department", b =>
@@ -621,12 +606,12 @@ namespace MoreHealth.Migrations
             modelBuilder.Entity("MoreHealth.Models.Doctor", b =>
                 {
                     b.Navigation("Feedbacks");
-
-                    b.Navigation("WorkSchedules");
                 });
 
             modelBuilder.Entity("MoreHealth.Models.Patient", b =>
                 {
+                    b.Navigation("AppointmentHomes");
+
                     b.Navigation("Feedbacks");
                 });
 

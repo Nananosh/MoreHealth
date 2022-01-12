@@ -27,6 +27,15 @@
                             url: "@Url.Action("RemoveDoctor","Admin")",
                             dataType: "json",
                             type: "DELETE"
+                        },
+                        parameterMap: function(options, operation) {
+                            if (operation === "update" || operation === "create") {
+                                options.startWorkTimeEvenDay = options.startWorkTimeEvenDay.toLocaleString();
+                                options.endWorkTimeEvenDay = options.endWorkTimeEvenDay.toLocaleString();
+                                options.startWorkTimeOddDay = options.startWorkTimeOddDay.toLocaleString();
+                                options.endWorkTimeOddDay = options.endWorkTimeOddDay.toLocaleString();
+                            }
+                            return options;
                         }
                     },
                     schema: {
@@ -40,7 +49,12 @@
                                 CabinetId: {from: "cabinetId",nullable: true, validation: {required: true} }, 
                                 Name: { from: "name", validation: {required: true} },
                                 Surname: {from: "surname", validation: {required: true} }, 
-                                LastName: { from: "lastName", validation: {required: true }}
+                                LastName: { from: "lastName", validation: {required: true }},
+                                StartWorkTimeEvenDay: { from: "startWorkTimeEvenDay",type: "date", validation: {required: true }},
+                                EndWorkTimeEvenDay: { from: "endWorkTimeEvenDay", type: "date", validation: {required: true }},
+                                StartWorkTimeOddDay: { from: "startWorkTimeOddDay", type: "date", validation: {required: true }},
+                                EndWorkTimeOddDay: { from: "endWorkTimeOddDay", type: "date", validation: {required: true }},
+                                Weekend: { from: "weekend", validation: {required: true }},
                             }
                         }
                     },
@@ -87,6 +101,34 @@
                                 return dataItem.Cabinet.cabinetNumber;
                         }
                     }, 
+                   {
+                       field: "StartWorkTimeEvenDay",
+                       title: "Четные начало",
+                       editor: startWorkTimeEvenDayEditor,
+                       format: "{0:HH:mm}"
+                   }, 
+                   {
+                       field: "EndWorkTimeEvenDay",
+                       title: "Четные конец",
+                       editor: endWorkTimeEvenDayEditor,
+                       format: "{0:HH:mm}"
+                   }, 
+                   {
+                       field: "StartWorkTimeOddDay",
+                       title: "Нечётные начало",
+                       editor: startWorkTimeOddDayEditor,
+                       format: "{0:HH:mm}"
+                   }, 
+                   {
+                       field: "EndWorkTimeOddDay",
+                       title: "Нечётные конец",
+                       editor: endWorkTimeOddDayEditor,
+                       format: "{0:HH:mm}"
+                   }, 
+                   {
+                       field: "Weekend",
+                       title: "Выходные"
+                   },
                     {
                         field: "Name",
                         title: "Имя"
@@ -104,10 +146,61 @@
                     },
                     {
                         command: "destroy"
+                    },
+                    {
+                        command: { text: "Добавить талоны", click: editTalons }
                     }
                 ]
             });
         });
+        
+        function editTalons(e){
+                   e.preventDefault();
+                   var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                   var redirectUrl = "@Url.Action("AddAppointmentByDoctor","Appointment")" + `/?id=${dataItem.Id}`
+                   console.log(redirectUrl)
+                   window.location.replace(redirectUrl);
+                }
+        
+        function startWorkTimeEvenDayEditor(container, options) {
+            $('<input required name="StartWorkTimeEvenDay">')
+                .appendTo(container)
+                .kendoTimePicker({
+                    timezone: "Europe/Minsk",
+                    value: new Date(),
+                    componentType: "modern"
+                });
+        }
+        
+        function endWorkTimeEvenDayEditor(container, options) {
+            $('<input required name="EndWorkTimeEvenDay">')
+                .appendTo(container)
+                .kendoTimePicker({
+                    timezone: "Europe/Minsk",
+                    value: new Date(),
+                    componentType: "modern"
+                });
+        }
+        
+        function startWorkTimeOddDayEditor(container, options) {
+            $('<input required name="StartWorkTimeOddDay">')
+                .appendTo(container)
+                .kendoTimePicker({
+                    timezone: "Europe/Minsk",
+                    value: new Date(),
+                    componentType: "modern"
+                });
+        }
+        
+        function endWorkTimeOddDayEditor(container, options) {
+            $('<input required name="EndWorkTimeOddDay">')
+                .appendTo(container)
+                .kendoTimePicker({
+                    timezone: "Europe/Minsk",
+                    value: new Date(),
+                    componentType: "modern"
+                });
+        }
         
         function specializationEditor(container, options) {
             $('<input required name="SpecializationId">')

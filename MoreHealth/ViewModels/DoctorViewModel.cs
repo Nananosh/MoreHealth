@@ -1,6 +1,7 @@
-﻿using MoreHealth.Models;
+﻿using System;
+using MoreHealth.Models;
 
-namespace MoreHealth.ViewModels.Account
+namespace MoreHealth.ViewModels
 {
     public class DoctorViewModel
     {
@@ -13,6 +14,15 @@ namespace MoreHealth.ViewModels.Account
         public string Name { get; set; }
         public string Surname { get; set; }
         public string LastName { get; set; }
-        public string FullName { get => Name + " " + Surname + " " + LastName; }
+        public DateTime StartWorkTimeEvenDay { get; set; }
+        public DateTime EndWorkTimeEvenDay { get; set; }
+        public DateTime StartWorkTimeOddDay { get; set; }
+        public DateTime EndWorkTimeOddDay { get; set; }
+        public string Weekend { get; set; }
+
+        public string FullName
+        {
+            get => Name + " " + Surname + " " + LastName;
+        }
     }
 }

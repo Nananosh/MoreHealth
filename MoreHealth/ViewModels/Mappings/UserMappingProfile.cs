@@ -51,6 +51,7 @@ namespace MoreHealth.ViewModels.Mappings
                 .ForMember(a => a.DateEnd, opt => opt.MapFrom(avm => avm.DateEnd))
                 .ForMember(a => a.Doctor,opt => opt.MapFrom(avm => avm.Doctor))
                 .ForMember(a => a.Id, opt => opt.MapFrom(avm => avm.Id))
+                .ForMember(a => a.DoctorId, opt => opt.MapFrom(avm => avm.DoctorId))
                 .ForMember(a => a.Patient, opt => opt.Ignore()).ReverseMap();
             CreateMap<DoctorViewModel, Models.Doctor>()
                 .ForMember(d => d.Id, opt => opt.MapFrom(dvm => dvm.Id))
@@ -63,13 +64,11 @@ namespace MoreHealth.ViewModels.Mappings
                 .ForMember(d => d.Feedbacks, opt => opt.Ignore())
                 .ForMember(d => d.Cabinet, opt => opt.MapFrom(dvm => dvm.Cabinet))
                 .ForMember(d => d.CabinetId, opt => opt.MapFrom(dvm => dvm.CabinetId))
-                .ForMember(d => d.WorkSchedules, opt => opt.Ignore()).ReverseMap();
-            CreateMap<WorkScheduleViewModel, Models.WorkSchedule>()
-                .ForMember(ws => ws.DoctorId, opt => opt.MapFrom(wsvm => wsvm.DoctorId))
-                .ForMember(ws => ws.RecurrenceRule, opt => opt.MapFrom(wsvm => wsvm.RecurrenceRule))
-                .ForMember(ws => ws.StartDate, opt => opt.MapFrom(wsvm => wsvm.StartDate))
-                .ForMember(ws => ws.EndDate, opt => opt.MapFrom(wsvm => wsvm.EndDate))
-                .ForMember(ws => ws.Doctor, opt => opt.Ignore()).ReverseMap();
+                .ForMember(d => d.StartWorkTimeEvenDay, opt => opt.MapFrom(dvm => dvm.StartWorkTimeEvenDay))
+                .ForMember(d => d.EndWorkTimeEvenDay, opt => opt.MapFrom(dvm => dvm.EndWorkTimeEvenDay))
+                .ForMember(d => d.StartWorkTimeOddDay, opt => opt.MapFrom(dvm => dvm.StartWorkTimeOddDay))
+                .ForMember(d => d.EndWorkTimeOddDay, opt => opt.MapFrom(dvm => dvm.EndWorkTimeOddDay))
+                .ForMember(d => d.Weekend, opt => opt.MapFrom(dvm => dvm.Weekend)).ReverseMap();
             CreateMap<PaidServiceViewModel, Models.PaidServices>()
                 .ForMember(ws => ws.Description, opt => opt.MapFrom(wsvm => wsvm.Description))
                 .ForMember(ws => ws.Price, opt => opt.MapFrom(wsvm => wsvm.Price))

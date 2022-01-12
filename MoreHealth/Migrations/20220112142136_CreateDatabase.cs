@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MoreHealth.Migrations
 {
-    public partial class CreateDataBase : Migration
+    public partial class CreateDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -87,33 +87,6 @@ namespace MoreHealth.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PaidServices", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WorkDate",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WorkDate", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WorkingShift",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StartWorkShift = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndWorkShift = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WorkingShift", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -254,7 +227,7 @@ namespace MoreHealth.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SpecializationName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DepartmentId = table.Column<int>(type: "int", nullable: true)
+                    DepartmentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -264,31 +237,26 @@ namespace MoreHealth.Migrations
                         column: x => x.DepartmentId,
                         principalTable: "Department",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "WorkSchedule",
+                name: "AppointmentHomes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    WorkingShiftId = table.Column<int>(type: "int", nullable: true),
-                    WorkDateId = table.Column<int>(type: "int", nullable: true)
+                    PatientId = table.Column<int>(type: "int", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorkSchedule", x => x.Id);
+                    table.PrimaryKey("PK_AppointmentHomes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WorkSchedule_WorkDate_WorkDateId",
-                        column: x => x.WorkDateId,
-                        principalTable: "WorkDate",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_WorkSchedule_WorkingShift_WorkingShiftId",
-                        column: x => x.WorkingShiftId,
-                        principalTable: "WorkingShift",
+                        name: "FK_AppointmentHomes_Patient_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patient",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -303,7 +271,13 @@ namespace MoreHealth.Migrations
                     SpecializationId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CabinetId = table.Column<int>(type: "int", nullable: true),
+                    StartWorkTimeEvenDay = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndWorkTimeEvenDay = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartWorkTimeOddDay = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndWorkTimeOddDay = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Weekend = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -312,6 +286,12 @@ namespace MoreHealth.Migrations
                         name: "FK_Doctor_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Doctor_Cabinet_CabinetId",
+                        column: x => x.CabinetId,
+                        principalTable: "Cabinet",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -330,20 +310,13 @@ namespace MoreHealth.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PatientId = table.Column<int>(type: "int", nullable: true),
                     DoctorId = table.Column<int>(type: "int", nullable: true),
-                    CabinetId = table.Column<int>(type: "int", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsHome = table.Column<bool>(type: "bit", nullable: false)
+                    DateStart = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateEnd = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Appointments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Appointments_Cabinet_CabinetId",
-                        column: x => x.CabinetId,
-                        principalTable: "Cabinet",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Appointments_Doctor_DoctorId",
                         column: x => x.DoctorId,
@@ -356,54 +329,6 @@ namespace MoreHealth.Migrations
                         principalTable: "Patient",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CabinetDoctor",
-                columns: table => new
-                {
-                    CabinetsId = table.Column<int>(type: "int", nullable: false),
-                    DoctorsId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CabinetDoctor", x => new { x.CabinetsId, x.DoctorsId });
-                    table.ForeignKey(
-                        name: "FK_CabinetDoctor_Cabinet_CabinetsId",
-                        column: x => x.CabinetsId,
-                        principalTable: "Cabinet",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CabinetDoctor_Doctor_DoctorsId",
-                        column: x => x.DoctorsId,
-                        principalTable: "Doctor",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DoctorWorkSchedule",
-                columns: table => new
-                {
-                    DoctorId = table.Column<int>(type: "int", nullable: false),
-                    WorkSchedulesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DoctorWorkSchedule", x => new { x.DoctorId, x.WorkSchedulesId });
-                    table.ForeignKey(
-                        name: "FK_DoctorWorkSchedule_Doctor_DoctorId",
-                        column: x => x.DoctorId,
-                        principalTable: "Doctor",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DoctorWorkSchedule_WorkSchedule_WorkSchedulesId",
-                        column: x => x.WorkSchedulesId,
-                        principalTable: "WorkSchedule",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -435,9 +360,9 @@ namespace MoreHealth.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Appointments_CabinetId",
-                table: "Appointments",
-                column: "CabinetId");
+                name: "IX_AppointmentHomes_PatientId",
+                table: "AppointmentHomes",
+                column: "PatientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_DoctorId",
@@ -489,9 +414,9 @@ namespace MoreHealth.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CabinetDoctor_DoctorsId",
-                table: "CabinetDoctor",
-                column: "DoctorsId");
+                name: "IX_Doctor_CabinetId",
+                table: "Doctor",
+                column: "CabinetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Doctor_SpecializationId",
@@ -502,11 +427,6 @@ namespace MoreHealth.Migrations
                 name: "IX_Doctor_UserId",
                 table: "Doctor",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DoctorWorkSchedule_WorkSchedulesId",
-                table: "DoctorWorkSchedule",
-                column: "WorkSchedulesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedback_DoctorId",
@@ -527,20 +447,13 @@ namespace MoreHealth.Migrations
                 name: "IX_Specialization_DepartmentId",
                 table: "Specialization",
                 column: "DepartmentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WorkSchedule_WorkDateId",
-                table: "WorkSchedule",
-                column: "WorkDateId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WorkSchedule_WorkingShiftId",
-                table: "WorkSchedule",
-                column: "WorkingShiftId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AppointmentHomes");
+
             migrationBuilder.DropTable(
                 name: "Appointments");
 
@@ -560,12 +473,6 @@ namespace MoreHealth.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CabinetDoctor");
-
-            migrationBuilder.DropTable(
-                name: "DoctorWorkSchedule");
-
-            migrationBuilder.DropTable(
                 name: "Feedback");
 
             migrationBuilder.DropTable(
@@ -575,22 +482,13 @@ namespace MoreHealth.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Cabinet");
-
-            migrationBuilder.DropTable(
-                name: "WorkSchedule");
-
-            migrationBuilder.DropTable(
                 name: "Doctor");
 
             migrationBuilder.DropTable(
                 name: "Patient");
 
             migrationBuilder.DropTable(
-                name: "WorkDate");
-
-            migrationBuilder.DropTable(
-                name: "WorkingShift");
+                name: "Cabinet");
 
             migrationBuilder.DropTable(
                 name: "Specialization");

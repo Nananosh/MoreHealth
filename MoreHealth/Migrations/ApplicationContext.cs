@@ -18,7 +18,6 @@ namespace MoreHealth.Models
         public DbSet<PaidServices> PaidServices { get; set; }
         public DbSet<Patient> Patient { get; set; }
         public DbSet<Specialization> Specialization { get; set; }
-        public DbSet<WorkSchedule> WorkSchedule { get; set; }
         public DbSet<AppointmentHome> AppointmentHomes { get; set; }
     }
 }

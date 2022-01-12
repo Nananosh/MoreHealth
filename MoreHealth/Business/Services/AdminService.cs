@@ -153,6 +153,11 @@ namespace MoreHealth.Business.Services
                 updateDoctor.LastName = doctor.LastName;
                 updateDoctor.CabinetId = doctor.CabinetId;
                 updateDoctor.SpecializationId = doctor.SpecializationId;
+                updateDoctor.EndWorkTimeEvenDay = doctor.EndWorkTimeEvenDay;
+                updateDoctor.EndWorkTimeOddDay = doctor.EndWorkTimeOddDay;
+                updateDoctor.StartWorkTimeEvenDay = doctor.StartWorkTimeEvenDay;
+                updateDoctor.StartWorkTimeOddDay = doctor.StartWorkTimeOddDay;
+                updateDoctor.Weekend = doctor.Weekend;
                 db.SaveChanges();
             }
 
@@ -324,7 +329,6 @@ namespace MoreHealth.Business.Services
         public void RemoveDoctor(Doctor doctor)
         {
             var removeDoctor = db.Doctor.Include(u => u.User).FirstOrDefault(x => x.Id == doctor.Id);
-            var removeWorkSchedule = db.WorkSchedule.Where(x => x.DoctorId == removeDoctor.Id);
             var removeUser = db.Users.FirstOrDefault(x => x.Id == removeDoctor.User.Id);
             var removeFeedback = db.Feedback.Where(x => x.DoctorId == removeDoctor.Id);
             var removeAppointments = db.Appointments.Where(x => x.Doctor.Id == removeDoctor.Id);
@@ -332,7 +336,6 @@ namespace MoreHealth.Business.Services
             {
                 db.Appointments.RemoveRange(removeAppointments);
                 db.Feedback.RemoveRange(removeFeedback);
-                db.WorkSchedule.RemoveRange(removeWorkSchedule);
                 db.Doctor.Remove(removeDoctor);
                 db.SaveChanges();
                 db.Users.Remove(removeUser);

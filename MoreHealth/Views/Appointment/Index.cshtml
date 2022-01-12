@@ -46,6 +46,7 @@
     });
 
     $("#datepicker").kendoDatePicker({
+        value: new Date("@DateTime.Now.ToString("yyyy-M-d")"),
         change: onChange
     })
 

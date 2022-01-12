@@ -9,10 +9,30 @@ namespace MoreHealth.ViewModels
         public Patient Patient { get; set; }
         public int? PatientId { get; set; }
         public Doctor Doctor { get; set; }
+        public int DoctorId { get; set; }
         public string Address { get; set; }
         public DateTime DateStart { get; set; }
-        public DateTime DateEnd { get => DateStart.AddMinutes(15); }
-        
-        public string GetDate { get => DateStart.ToShortTimeString(); }
+
+        public DateTime DateEnd { get; set; }
+
+        public string GetDate
+        {
+            get => DateStart.ToShortTimeString();
+        }
+
+        public string Title
+        {
+            get
+            {
+                if (PatientId != null)
+                {
+                    return $"{Patient.Surname} {Patient.Name} {Patient.LastName}";
+                }
+                else
+                {
+                    return "Талон свободен";
+                }
+            }
+        }
     }
 }
