@@ -24,16 +24,26 @@
         <button id="textButton">Заказать</button>
     </div>
     <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <p></p>
         <input id="address2" style="width: 40%;" />
+        <p></p>
         <button id="callingdoctorathome">Заказать</button>
     </div>
 </div>
+
+<style>
+    .k-floating-label-container {
+        width: 100%;
+    }
+</style>
+
 <script>
     $("#doctor").kendoDropDownList({
         dataTextField: "fullName",
         dataValueField: "id",
         optionLabel: "Выберите врача...",
         height: 500,
+        change: onChange,
         dataSource: {
             transport: {
                 read: {
@@ -50,19 +60,19 @@
         change: onChange
     })
 
-    function onChange() {
-        $("#talons").kendoDropDownList({
+    $("#talons").kendoDropDownList({
             dataTextField: "getDate",
             dataValueField: "id",
             optionLabel: "Выберите талон",
             height: 500,
+            autoBind: false,
+            enable: false,
             dataSource: {
                 transport: {
                     read: {
                         url: "@Url.Action("GetTalonsByDoctorDate", "Appointment")",
                         data: function () {
                             var datapicker = $("#datepicker").data("kendoDatePicker").value();
-                            var t = kendo.toString(datapicker, "dd/MM/yyyy");
                             return {
                                 doctor: $("#doctor").data("kendoDropDownList").value(),
                                 talon1: kendo.toString(datapicker, "dd/MM/yyyy")
@@ -72,21 +82,21 @@
 
                 }
             }
-        });
+    });
+
+    function onChange() {
+        $("#talons").data("kendoDropDownList").dataSource.read();
+        $("#talons").data("kendoDropDownList").enable(true);
     }
 
     $("#address").kendoTextBox({
-        placeholder: "Адрес",
-        label: {
-            content: "адрес",
-            floating: true
-        }
+        placeholder: "Адрес"
     });
 
     $("#address2").kendoTextBox({
         placeholder: "Адрес",
         label: {
-            content: "адрес",
+            content: "Адрес",
             floating: true
         }
     });
@@ -107,7 +117,6 @@
             url: `/Appointment/CallingDoctorHome/?address=${address}&userid=${userId}`,
             type: 'post',
             success: function (response) {
-                console.log(response)
                 alert(response);
             },
             error: function (response) {
@@ -124,7 +133,6 @@
             url: `/Appointment/AddPatientTalon/?talon=${talonId}&address=${address}&userid=${userId}`,
             type: 'post',
             success: function (response) {
-                console.log(response)
                 alert(response);
             },
             error: function (response) {
@@ -132,6 +140,4 @@
             }
         });
     }
-
-
 </script>
