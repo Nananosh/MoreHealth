@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MoreHealth.Models;
 using MoreHealth.ViewModels;
 using MoreHealth.ViewModels.Account;
@@ -21,6 +22,12 @@ namespace MoreHealth.Controllers
             _database = context;
             _userManager = userManager;
             _signInManager = signInManager;
+        }
+        
+        public async Task<string> GetUserImage(string id)
+        {
+            var user = await _database.Users.SingleOrDefaultAsync(u => u.Id == id);
+            return user.UserImage;
         }
         
         [HttpGet]

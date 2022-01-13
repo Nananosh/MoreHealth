@@ -33,12 +33,15 @@
                     </li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Feedback" asp-action="Index">Оставить отзыв</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Appointment" asp-action="Index">Талоны</a>
-                        </li>
+                        @if (User.IsInRole("Patient"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Feedback" asp-action="Index">Оставить отзыв</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointment" asp-action="Index">Талоны</a>
+                            </li>
+                        }
                     }
                 </ul>
                 <ul class="navbar-nav flex-grow-1 justify-content-end">
@@ -84,6 +87,15 @@
         @RenderBody()
     </main>
 </div>
+@if (User.Identity.IsAuthenticated)
+{
+    <script>
+let avatar = document.getElementById('avatar');
+$.get('@Url.Action("GetUserImage", "Account", new {id = User.Claims.ElementAt(0).Value})', function(data, status){
+    avatar.src = data;
+});
+    </script>
+}
 @* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
