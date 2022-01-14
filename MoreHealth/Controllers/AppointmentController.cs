@@ -83,6 +83,14 @@ namespace MoreHealth.Controllers
             return View();
         }
         
+        public IActionResult AppointmentByPatient(string id)
+        {
+            var patientId = doctorOrPatientService.GetPatientByUserId(db,id);
+            var talons = appointmentService.GetTalonsByPatientId(db, patientId);
+            return View(talons);
+        }
+       
+        
         public IActionResult GetTalonsByDoctorId(int id)
         {
             var talons = appointmentService.GetTalonsByDoctorId(db, id);

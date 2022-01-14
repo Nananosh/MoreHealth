@@ -12,6 +12,7 @@ namespace MoreHealth.Business.Interfaces
         string AddPatientTalon(ApplicationContext db, int talon, string address, int patientId);
         string CallingDoctorHome(ApplicationContext db, AppointmentHome appointmentHome);
         public IEnumerable<Appointment> GetTalonsByDoctorId(ApplicationContext db, int id);
+        List<Appointment> GetTalonsByPatientId(ApplicationContext db, int id);
         public Appointment AddDoctorTalon(ApplicationContext db, Appointment appointment);
         public Appointment EditDoctorTalon(ApplicationContext db, Appointment appointment);
         public void DeleteDoctorTalon(ApplicationContext db, Appointment appointment);

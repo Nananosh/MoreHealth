@@ -181,3 +181,4 @@ C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Account\RegisterDoctor.cshtml.g.cs
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Appointment\AddAppointmentByDoctor.cshtml.g.cs
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Appointment\AppointmentByDoctor.cshtml.g.cs
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Appointment\AppointmentByPatient.cshtml.g.cs

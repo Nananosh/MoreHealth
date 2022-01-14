@@ -64,6 +64,10 @@
                                 {
                                     <a class="dropdown-item" asp-controller="Appointment" asp-action="AppointmentByDoctor" asp-route-id="@User.Claims.ElementAt(0).Value">Талоны</a>
                                 }
+                                @if (User.IsInRole("Patient"))
+                                {
+                                    <a class="dropdown-item" asp-controller="Appointment" asp-action="AppointmentByPatient" asp-route-id="@User.Claims.ElementAt(0).Value">Талоны</a>
+                                }
                                 <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Выход</a>
                             </div>
                         </li>

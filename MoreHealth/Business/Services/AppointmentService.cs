@@ -67,6 +67,14 @@ namespace MoreHealth.Business.Services
             return appointments;
         }
 
+        public List<Appointment> GetTalonsByPatientId(ApplicationContext db, int id)
+        {
+            var appointments = db.Appointments.Include(x => x.Doctor).ThenInclude(x => x.Cabinet).Where(x => x.Patient.Id == id)
+                .OrderByDescending(x => x.DateStart).ToList();
+
+            return appointments;
+        }
+
         public Appointment AddDoctorTalon(ApplicationContext db, Appointment appointment)
         {
             var addAppointment = new Appointment
@@ -97,7 +105,7 @@ namespace MoreHealth.Business.Services
                 editAppointment.DateStart = appointment.DateStart;
                 db.SaveChanges();
             }
-            
+
             var editedAppointment = db.Appointments
                 .Include(x => x.Patient)
                 .FirstOrDefault(x => x.Id == editAppointment.Id);
