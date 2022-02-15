@@ -1,0 +1,14 @@
+﻿@model MoreHealth.ViewModels.DoctorViewModel
+
+<div class="content">
+    <h4><a class="text-primary">@Model.FullName</a><p/></h4>
+        <br/>
+        <h5> Четные: <a class="text-secondary">@Model.StartWorkTimeEvenDay.ToString("t") - @Model.EndWorkTimeEvenDay.ToString("t")</a> <br/></h5>
+        <h5> Нечетные: <a class="text-secondary">@Model.StartWorkTimeOddDay.ToString("t") - @Model.EndWorkTimeOddDay.ToString("t") </a>  <br/></h5>
+        @if (Model.Weekend != null)
+        {
+            <h5> Выходные: <a class="text-secondary">@Model.Weekend </a> <br/></h5>
+        }
+    <br/>
+    <br/>
+</div>

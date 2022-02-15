@@ -10,6 +10,7 @@
                     <th scope="col">ФИО Доктора</th>
                     <th scope="col">Кабинет</th>
                     <th scope="col">Дата приёма</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -18,15 +19,28 @@
                     <tr>
                         <th scope="row">@appointment.Id</th>
                         <td>@appointment.Doctor.Surname @appointment.Doctor.Name @appointment.Doctor.LastName</td>
-                        <td>@appointment.Doctor.Cabinet.CabinetNumber</td>
+                        @if (appointment.Doctor.Cabinet != null)
+                        {
+                            <td>@appointment.Doctor.Cabinet.CabinetNumber</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
                         @if (@appointment.DateStart >= DateTime.Now)
                         {
                             <td class="text-success">@appointment.DateStart</td>
                         }
                         else
                         {
-                            <td class="text-danger">@appointment.DateStart</td>
+                            <td class="text-secondary">@appointment.DateStart</td>
                         }
+                        <td>
+                             @if (appointment.DateStart > DateTime.Now)
+                                {
+                                    <a class="btn btn-outline-danger" asp-area="" asp-controller="Appointment" asp-route-appointmentId="@appointment.Id" asp-action="CancelAppointment">Отменить</a>
+                                }
+                        </td>
                     </tr>
                 }
                 </tbody>

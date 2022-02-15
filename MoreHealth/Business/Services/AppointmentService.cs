@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -13,6 +14,16 @@ namespace MoreHealth.Business.Services
 {
     public class AppointmentService : IAppointmentService
     {
+        private readonly ApplicationContext db;
+        private readonly IMapper mapper;
+
+        public AppointmentService(
+            ApplicationContext context,
+            IMapper mapper)
+        {
+            this.mapper = mapper;
+            this.db = context;
+        }
         public IEnumerable<Appointment> GetAllTalons(ApplicationContext db)
         {
             var appointments = db.Appointments.Include(d => d.Doctor).Include(p => p.Patient);
@@ -34,6 +45,24 @@ namespace MoreHealth.Business.Services
             return appointments;
         }
 
+        public void CancelAppointment(int id)
+        {
+            var cancelAppointment = db.Appointments.FirstOrDefault(x => x.Id == id);
+            
+            if (cancelAppointment != null)
+            {
+                cancelAppointment.PatientId = null;
+                db.SaveChanges();
+            }
+        }
+
+        public DoctorViewModel GetDoctorById(int id)
+        {
+            var doctor = db.Doctor.Where(x => x.Id == id).FirstOrDefault();
+
+            return mapper.Map<DoctorViewModel>(doctor);
+        }
+        
         public string AddPatientTalon(ApplicationContext db, int talon, string address, int patientId)
         {
             var talons = db.Appointments.FirstOrDefault(x => x.Id == talon);

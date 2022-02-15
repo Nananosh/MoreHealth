@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using MoreHealth.Models;
+using MoreHealth.ViewModels;
 
 namespace MoreHealth.Business.Interfaces
 {
@@ -16,5 +17,7 @@ namespace MoreHealth.Business.Interfaces
         public Appointment AddDoctorTalon(ApplicationContext db, Appointment appointment);
         public Appointment EditDoctorTalon(ApplicationContext db, Appointment appointment);
         public void DeleteDoctorTalon(ApplicationContext db, Appointment appointment);
+        DoctorViewModel GetDoctorById(int id);
+        void CancelAppointment(int id);
     }
 }

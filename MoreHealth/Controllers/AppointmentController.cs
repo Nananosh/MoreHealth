@@ -70,6 +70,13 @@ namespace MoreHealth.Controllers
             return Json(mapper.Map<IEnumerable<AppointmentViewModel>>(talons));
         }
         
+        public IActionResult CancelAppointment(int appointmentId)
+        {
+            appointmentService.CancelAppointment(appointmentId);
+            
+            return RedirectToAction("AppointmentByPatient", "Appointment");
+        }
+        
         public IActionResult AddAppointmentByDoctor(int id)
         {
             ViewBag.Id = id;
@@ -83,10 +90,14 @@ namespace MoreHealth.Controllers
             return View();
         }
         
-        public IActionResult AppointmentByPatient(string id)
+        public IActionResult AppointmentByPatient()
         {
-            var patientId = doctorOrPatientService.GetPatientByUserId(db,id);
+            var userId = User.Claims.ElementAt(0).Value;
+            if (string.IsNullOrEmpty(userId)) RedirectToAction("Index","Home");
+
+            var patientId = doctorOrPatientService.GetPatientByUserId(db,userId);
             var talons = appointmentService.GetTalonsByPatientId(db, patientId);
+            
             return View(talons);
         }
        
