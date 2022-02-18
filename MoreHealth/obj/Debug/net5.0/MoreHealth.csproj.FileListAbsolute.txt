@@ -282,3 +282,4 @@ C:\Users\great\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\ref\MoreHeal
 C:\Users\great\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\MoreHealth.pdb
 C:\Users\great\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\MoreHealth.genruntimeconfig.cache
 C:\Users\great\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Home\DoctorWorkTime.cshtml.g.cs
+C:\Users\great\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Home\About.cshtml.g.cs

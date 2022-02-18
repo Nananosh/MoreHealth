@@ -7,9 +7,30 @@
     <title>@ViewData["Title"] - MoreHealth</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css"/>
-
     <link rel="stylesheet" href="~/lib/Kendo/styles/kendo.common.min.css"/>
     <link rel="stylesheet" href="~/lib/Kendo/styles/kendo.bootstrap-vintage.min.css"/>
+    
+    <link rel="stylesheet" href="~/css/animate.css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/css/aos.css">
+    <link rel="stylesheet" href="~/css/ionicons.min.css">
+    
+    <script src="~/js/popper.min.js"></script>
+      <script src="~/js/bootstrap.min.js"></script>
+      <script src="~/js/jquery.easing.1.3.js"></script>
+      <script src="~/js/jquery.waypoints.min.js"></script>
+      <script src="~/js/jquery.stellar.min.js"></script>
+      <script src="~/js/owl.carousel.min.js"></script>
+      <script src="~/js/jquery.magnific-popup.min.js"></script>
+      <script src="~/js/aos.js"></script>
+      <script src="~/js/jquery.animateNumber.min.js"></script>
+      <script src="~/js/bootstrap-datepicker.js"></script>
+      <script src="~/js/jquery.timepicker.min.js"></script>
+      <script src="~/js/scrollax.min.js"></script>
+    
+    
     <script src="~/lib/Kendo/js/jquery.min.js"></script>
     <script src="~/lib/Kendo/js/kendo.all.min.js"></script>
     <script src="~/lib/Kendo/js/kendo.timezones.min.js"></script>
@@ -40,6 +61,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Appointment" asp-action="Index">Талоны</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">О Нас</a>
                             </li>
                         }
                     }
@@ -104,6 +128,7 @@ $.get('@Url.Action("GetUserImage", "Account", new {id = User.Claims.ElementAt(0)
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script src="http://kendo.cdn.telerik.com/2016.1.112/js/jszip.min.js"></script>
+
 @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
