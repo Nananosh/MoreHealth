@@ -175,7 +175,7 @@ namespace MoreHealth.Business.Services
             if (updateFeedBack != null)
             {
                 updateFeedBack.Text = feedback.Text;
-                updateFeedBack.IsLike = feedback.IsLike;
+                updateFeedBack.Rating = feedback.Rating;
                 updateFeedBack.DoctorId = feedback.DoctorId;
                 updateFeedBack.PatientId = feedback.PatientId;
                 db.SaveChanges();

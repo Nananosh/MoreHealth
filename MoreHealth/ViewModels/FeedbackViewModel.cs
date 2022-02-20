@@ -13,6 +13,6 @@ namespace MoreHealth.ViewModels
         public DoctorViewModel Doctor { get; set; }
         public int DoctorId { get; set; }
         public string Text { get; set; }
-        public bool IsLike { get; set; }
+        public int Rating { get; set; }
     }
 }

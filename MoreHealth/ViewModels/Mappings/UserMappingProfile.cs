@@ -42,7 +42,7 @@ namespace MoreHealth.ViewModels.Mappings
                 .ForMember(f => f.Patient, opt => opt.Ignore())
                 .ForMember(f => f.Doctor, opt => opt.Ignore())
                 .ForMember(f => f.DoctorId, opt => opt.MapFrom(fvm => fvm.DoctorId))
-                .ForMember(f => f.IsLike, opt => opt.MapFrom(fvm => fvm.IsLike))
+                .ForMember(f => f.Rating, opt => opt.MapFrom(fvm => fvm.Rating))
                 .ForMember(f => f.Text, opt => opt.MapFrom(fvm => fvm.Text)).ReverseMap();
             CreateMap<AppointmentViewModel, Models.Appointment>()
                 .ForMember(a => a.Address, opt => opt.MapFrom(avm => avm.Address))

@@ -32,7 +32,7 @@
                                 Doctor: { from: "doctor", validation: {required: true} }, 
                                 DoctorId: {from: "doctorId", validation: {required: true} },
                                 Text: { from: "text", validation: {required: true} },
-                                IsLike: {from: "isLike", type:"boolean" , validation: {required: true} }, 
+                                Rating: {from: "rating", validation: {required: true} }, 
                             }
                         }
                     },
@@ -66,8 +66,8 @@
                         title: "Отзыв"
                     }, 
                     {
-                        field: "IsLike",
-                        title: "Понравилось?"
+                        field: "Rating",
+                        title: "Оценка обслуживания"
                     },
                     {
                         command: "destroy"

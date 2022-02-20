@@ -11,19 +11,29 @@
         <input id="doctors" disabled="disabled" style="width: 100%;"/>
 
         <div style="margin-top: 2em;" class="form-group">
+            <h4>Оцените обслуживание:</h4>
+            <input id="rating" name="rating">
+        </div>
+        
+        <div style="margin-top: 2em;" class="form-group">
             <textarea class="form-control" id="textArea" rows="3"></textarea>
         </div>
-
-        <div style="margin-top: 2em;" class="form-group">
-            <button id="like" class="btn btn-success" onclick=""><img src="https://img.icons8.com/ios/30/000000/facebook-like--v1.png"/></button>
-            <button id="dislike" class="btn btn-danger" onclick=""><img src="https://img.icons8.com/ios/30/000000/thumbs-down.png"/></button>
-        </div>
-
+        
         <button id="but1" class="btn btn-primary">Отправить</button>
     </div>
 </div>
 
 <script>
+$(document).ready(function() {
+            $("#rating").kendoRating({
+                min: 1,
+                max: 10,
+                value: 0,
+                precision: "item"
+            });
+        });
+
+
     $(document).ready(function () {
         document.getElementById('but1').disabled = true;
 
@@ -100,21 +110,15 @@
     }
 
     function onSelect(e) {
-        console.log(e)
         document.getElementById('but1').disabled = false;
     }
-    let isLike;
-    $('#like').click(function (){
-        isLike = 1;
-    });
-    $('#dislike').click(function (){
-        isLike = 0;
-        });
+    
     $('#but1').click(function () {
         var doctorid = $("#doctors").data("kendoDropDownList").value();
         var message = $("#textArea").val();
         var userId = "@User.Claims.ElementAt(0).Value";
-        var buildUrl = "@Url.Action("AddComment", "FeedBack")" + `/?isLike=${isLike}&doctorId=${doctorid}&userId=${userId}&message=${message}`;
+        var score = $("#rating").data("kendoRating").value();
+        var buildUrl = "@Url.Action("AddComment", "FeedBack")" + `/?rating=${score}&doctorId=${doctorid}&userId=${userId}&message=${message}`;
         $.ajax({
             type: "POST",
             url: buildUrl,

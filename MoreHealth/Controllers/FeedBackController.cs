@@ -74,13 +74,13 @@ namespace MoreHealth.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddComment(byte isLike, int doctorId, string userId, string message)
+        public IActionResult AddComment(int rating, int doctorId, string userId, string message)
         {
             var model = new FeedbackViewModel
             {
                 DoctorId = doctorId,
                 PatientId = doctorOrPatientService.GetPatientByUserId(db, userId),
-                IsLike = Convert.ToBoolean(isLike),
+                Rating = rating,
                 Text = message
             };
             var messageToUser = feedBackService.AddComment(db, mapper.Map<Feedback>(model));
