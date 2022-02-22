@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MoreHealth.Business.Interfaces;
 using MoreHealth.Models;
+using MoreHealth.ViewModels;
 
 namespace MoreHealth.Controllers
 {
@@ -18,13 +20,15 @@ namespace MoreHealth.Controllers
         private readonly ApplicationContext db;
         private readonly IAppointmentService appointmentService;
         private readonly IDoctorOrPatientService doctorOrPatientService;
+        private readonly IMapper mapper;
         public HomeController(ILogger<HomeController> logger,
             ApplicationContext context, 
             IDoctorOrPatientService doctorOrPatientService,
-            IAppointmentService appointmentService)
+            IAppointmentService appointmentService, IMapper mapper)
         {
             _logger = logger;
             this.appointmentService = appointmentService;
+            this.mapper = mapper;
             this.doctorOrPatientService = doctorOrPatientService;
             db = context;
         }
@@ -51,6 +55,13 @@ namespace MoreHealth.Controllers
         public IActionResult About()
         {
             return View();
+        }
+
+        public IActionResult AllDoctors()
+        {
+            var doctors = appointmentService.GetAllDoctors();
+
+            return View(mapper.Map<List<DoctorViewModel>>(doctors));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

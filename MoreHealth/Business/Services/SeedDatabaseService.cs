@@ -74,14 +74,14 @@ namespace MoreHealth.Business.Services
                 Console.WriteLine("Роль доктора создана");
             }
 
-            if (db.Roles.Any(x => x.Name == "Nurse"))
+            if (db.Roles.Any(x => x.Name == "Registrar"))
             {
-                Console.WriteLine("Роль медсестры есть");
+                Console.WriteLine("Роль регистратуры есть");
             }
             else
             {
-                await roleManager.CreateAsync(new IdentityRole("Nurse"));
-                Console.WriteLine("Роль медсестры создана");
+                await roleManager.CreateAsync(new IdentityRole("Registrar"));
+                Console.WriteLine("Роль регистратуры создана");
             }
         }
     }

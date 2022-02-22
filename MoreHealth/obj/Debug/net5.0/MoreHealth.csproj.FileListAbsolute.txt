@@ -177,7 +177,6 @@ C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\bin\Debug\net5.0\Newtonsoft.J
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Admin\AdminPaidService.cshtml.g.cs
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Admin\AdminDoctor.cshtml.g.cs
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Admin\AdminFeedback.cshtml.g.cs
-C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Admin\AdminPanel.cshtml.g.cs
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Account\RegisterDoctor.cshtml.g.cs
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Appointment\AddAppointmentByDoctor.cshtml.g.cs
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Appointment\AppointmentByDoctor.cshtml.g.cs
@@ -285,3 +284,6 @@ C:\Users\great\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\
 C:\Users\great\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Home\About.cshtml.g.cs
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Home\About.cshtml.g.cs
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Home\DoctorWorkTime.cshtml.g.cs
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Appointment\PatientAppointment.cshtml.g.cs
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Appointment\AddAppointmentPatientByDoctor.cshtml.g.cs
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Home\AllDoctors.cshtml.g.cs

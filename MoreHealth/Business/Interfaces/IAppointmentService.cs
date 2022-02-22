@@ -8,6 +8,7 @@ namespace MoreHealth.Business.Interfaces
 {
     public interface IAppointmentService
     {
+        public List<Doctor> GetAllDoctors();
         IEnumerable<Appointment> GetAllTalons(ApplicationContext db);
         IEnumerable<Appointment> GetTalonsByDoctorDate(ApplicationContext db,int id, DateTime talon);
         string AddPatientTalon(ApplicationContext db, int talon, string address, int patientId);
@@ -19,5 +20,7 @@ namespace MoreHealth.Business.Interfaces
         public void DeleteDoctorTalon(ApplicationContext db, Appointment appointment);
         DoctorViewModel GetDoctorById(int id);
         void CancelAppointment(int id);
+        public Appointment GetTalonById(int id);
+        public List<Patient> GetAllPatient();
     }
 }

@@ -130,5 +130,27 @@ namespace MoreHealth.Controllers
         {
             appointmentService.DeleteDoctorTalon(db, mapper.Map<Appointment>(model)); ;
         }
+
+        [HttpGet]
+        public IActionResult PatientAppointment(int id)
+        {
+            var talon = appointmentService.GetTalonById(id);
+
+            return View(talon);
+        }
+
+        [HttpGet]
+        public IActionResult GetAllPatients()
+        {
+            var patients = appointmentService.GetAllPatient();
+
+            return Json(mapper.Map<List<PatientViewModel>>(patients));
+        }
+
+        [HttpGet]
+        public IActionResult AddAppointmentPatientByDoctor()
+        {
+            return View();
+        }
     }
 }

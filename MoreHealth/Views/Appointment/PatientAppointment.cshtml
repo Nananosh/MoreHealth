@@ -1,0 +1,19 @@
+﻿@model Appointment
+<div class="row">
+    <div class="col-lg-12 d-flex flex-row align-items-baseline">
+        <div class="h4">Доктор:</div>
+        <div class="ml-1">@Model.Doctor.Surname @Model.Doctor.Name @Model.Doctor.LastName</div>
+    </div>
+    <div class="col-lg-12 d-flex flex-row align-items-baseline">
+        <div class="h4">Кабинет:</div>
+        <div class="ml-1">@Model.Doctor.Cabinet.CabinetNumber</div>
+    </div>
+    <div class="col-lg-12 d-flex flex-row align-items-baseline">
+        <div class="h4">Дата начала приёма:</div>
+        <div class="ml-1">@Model.DateStart</div>
+    </div>
+    <div class="col-lg-12 d-flex flex-row align-items-baseline">
+        <div class="h4">Дата конца приёма:</div>
+        <div class="ml-1">@Model.DateEnd</div>
+    </div>
+</div>

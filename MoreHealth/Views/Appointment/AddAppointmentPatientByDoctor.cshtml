@@ -15,6 +15,9 @@
                 <input id="doctor" style="width: 40%;"/>
             </div>
             <div class="col-lg-12 d-flex justify-content-center mt-3">
+                <input id="patient" style="width: 40%;"/>
+            </div>
+            <div class="col-lg-12 d-flex justify-content-center mt-3">
                 <input id="datepicker" value="11/12/2021" title="datepicker" style="width: 40%"/>
             </div>
             <div class="col-lg-12 d-flex justify-content-center mt-3">
@@ -61,6 +64,26 @@
             }
         }
     });
+    
+    $("#patient").kendoDropDownList({
+            dataTextField: "fullName",
+            dataValueField: "user.id",
+            filter: "startswith",
+            optionLabel: "Выберите пациента...",
+            height: 500,
+            change: onChange2,
+            enable: false,
+            dataSource: {
+                serverFiltering: false,
+                transport: {
+                    read: {
+                        url: "@Url.Action("GetAllPatients", "Appointment")",
+                        dataType: "json",
+                        cache: false
+                    }
+                }
+            }
+        });
 
     $("#datepicker").kendoDatePicker({
         value: new Date("@DateTime.Now.ToString("yyyy-M-d")"),
@@ -92,9 +115,14 @@
     });
 
     function onChange() {
-        $("#talons").data("kendoDropDownList").dataSource.read();
-        $("#talons").data("kendoDropDownList").enable(true);
+        $("#patient").data("kendoDropDownList").dataSource.read();
+        $("#patient").data("kendoDropDownList").enable(true);
     }
+    
+    function onChange2() {
+            $("#talons").data("kendoDropDownList").dataSource.read();
+            $("#talons").data("kendoDropDownList").enable(true);
+        }
 
     $("#address").kendoTextBox({
         placeholder: "Адрес"
@@ -131,12 +159,12 @@
     function onClick() {
         const talonId = $("#talons").data("kendoDropDownList").value()
         const address = $("#address").data("kendoTextBox").value()
-        var userId = "@User.Claims.ElementAt(0).Value";
+        var userId = $("#patient").data("kendoDropDownList").value();
         $.ajax({
             url: `/Appointment/AddPatientTalon/?talon=${talonId}&address=${address}&userid=${userId}`,
             type: 'post',
             success: function (response) {
-                var redirectUrl = "@Url.Action("PatientAppointment","Appointment")" + `/?id=${talonId}`
+                var redirectUrl = "@Url.Action("PatientAppointment", "Appointment")" + `/?id=${talonId}`
                                    window.location.replace(redirectUrl);
             },
             error: function (response) {

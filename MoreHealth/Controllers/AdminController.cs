@@ -61,11 +61,6 @@ namespace MoreHealth.Controllers
         {
             return View();
         }
-        
-        public IActionResult AdminPanel()
-        {
-            return View();
-        }
 
         public JsonResult GetAllCabinets()
         {

@@ -24,6 +24,7 @@ namespace MoreHealth.Business.Services
             this.mapper = mapper;
             this.db = context;
         }
+
         public IEnumerable<Appointment> GetAllTalons(ApplicationContext db)
         {
             var appointments = db.Appointments.Include(d => d.Doctor).Include(p => p.Patient);
@@ -48,7 +49,7 @@ namespace MoreHealth.Business.Services
         public void CancelAppointment(int id)
         {
             var cancelAppointment = db.Appointments.FirstOrDefault(x => x.Id == id);
-            
+
             if (cancelAppointment != null)
             {
                 cancelAppointment.PatientId = null;
@@ -62,7 +63,7 @@ namespace MoreHealth.Business.Services
 
             return mapper.Map<DoctorViewModel>(doctor);
         }
-        
+
         public string AddPatientTalon(ApplicationContext db, int talon, string address, int patientId)
         {
             var talons = db.Appointments.FirstOrDefault(x => x.Id == talon);
@@ -98,7 +99,8 @@ namespace MoreHealth.Business.Services
 
         public List<Appointment> GetTalonsByPatientId(ApplicationContext db, int id)
         {
-            var appointments = db.Appointments.Include(x => x.Doctor).ThenInclude(x => x.Cabinet).Where(x => x.Patient.Id == id)
+            var appointments = db.Appointments.Include(x => x.Doctor).ThenInclude(x => x.Cabinet)
+                .Where(x => x.Patient.Id == id)
                 .OrderByDescending(x => x.DateStart).ToList();
 
             return appointments;
@@ -147,6 +149,33 @@ namespace MoreHealth.Business.Services
             var deleteAppointment = db.Appointments.FirstOrDefault(x => x.Id == appointment.Id);
             if (deleteAppointment != null) db.Appointments.Remove(deleteAppointment);
             db.SaveChanges();
+        }
+
+        public Appointment GetTalonById(int id)
+        {
+            var appointment = db.Appointments
+                .Include(x => x.Doctor)
+                .ThenInclude(x => x.Cabinet)
+                .Include(x => x.Patient)
+                .FirstOrDefault(x => x.Id == id);
+
+            return appointment;
+        }
+
+        public List<Patient> GetAllPatient()
+        {
+            var patients = db.Patient.Include(x => x.User).ToList();
+            return patients;
+        }
+
+        public List<Doctor> GetAllDoctors()
+        {
+            var doctors = db.Doctor
+                .Include(x => x.Cabinet)
+                .Include(x => x.Specialization)
+                .ThenInclude(x => x.Department).ToList();
+
+            return doctors;
         }
     }
 }
