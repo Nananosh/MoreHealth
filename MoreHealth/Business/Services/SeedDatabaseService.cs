@@ -32,7 +32,7 @@ namespace MoreHealth.Business.Services
                 var user = new User
                 {
                     Email = "admin@eveningschool.com", UserName = "Admin",
-                    UserImage = "https://img.icons8.com/material-outlined/200/000000/user--v1.png"
+                    UserImage = "https://img.icons8.com/ios-glyphs/200/000000/admin-settings-male.png"
                 };
 
                 await userManager.CreateAsync(user, "123Snp-");

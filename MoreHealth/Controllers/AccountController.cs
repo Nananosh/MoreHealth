@@ -44,7 +44,7 @@ namespace MoreHealth.Controllers
                 var user = new User
                 {
                     Email = model.Email, UserName = model.UserName,
-                    UserImage = "https://img.icons8.com/material-outlined/200/000000/user--v1.png"
+                    UserImage = "https://img.icons8.com/ios-glyphs/200/000000/medical-doctor.png"
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -84,7 +84,7 @@ namespace MoreHealth.Controllers
                 var user = new User
                 {
                     Email = model.Email, UserName = model.UserName,
-                    UserImage = "https://img.icons8.com/material-outlined/200/000000/user--v1.png"
+                    UserImage = "https://img.icons8.com/ios-glyphs/200/000000/user-menu-male.png"
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);

@@ -79,3 +79,19 @@ body {
 }
 
 
+@font-face {
+  font-family: "GB";
+  src: url("../gothamcond_bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+.gb{
+  font-family: "GB";
+  color: #053A32;
+}
+ body{
+   margin: 0px;
+   background-image: url(../../back.jpg);
+   background-size:  cover;
+ }
+

@@ -18,7 +18,7 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #dbd3be;">
         <div class="container">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MoreHealth</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -28,29 +28,29 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="PaidServices" asp-action="Index">Платные услуги</a>
+                        <a class="nav-link text-dark border-left border-right gb" asp-area="" asp-controller="PaidServices" asp-action="Index">Платные услуги</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AllDoctors">Наши врачи</a>
+                        <a class="nav-link text-dark border-left border-right gb" asp-area="" asp-controller="Home" asp-action="AllDoctors">Наши врачи</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">О нас</a>
+                        <a class="nav-link text-dark border-left border-right gb" asp-area="" asp-controller="Home" asp-action="About">О нас</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Article">Новости</a>
+                        <a class="nav-link text-dark border-left border-right gb" asp-area="" asp-controller="Home" asp-action="Article">Новости</a>
                     </li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         @if (User.IsInRole("Patient"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Feedback" asp-action="Index">Оставить отзыв</a>
+                                <a class="nav-link text-dark border-left border-right gb" asp-area="" asp-controller="Feedback" asp-action="Index">Оставить отзыв</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Appointment" asp-action="Index">Талоны</a>
+                                <a class="nav-link text-dark border-left border-right gb" asp-area="" asp-controller="Appointment" asp-action="Index">Талоны</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">О Нас</a>
+                                <a class="nav-link text-dark border-left border-right gb" asp-area="" asp-controller="Home" asp-action="About">О Нас</a>
                             </li>
                         }
                     }
@@ -62,7 +62,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                                role="button" data-toggle="dropdown" aria-haspopup="true"
                                aria-expanded="false">
-                                <img id="avatar" class="rounded-circle" src="" value="" alt="avatar" style="height: 33px; width: 33px; object-fit:cover;"/>
+                                <img id="avatar" src="" value="" alt="avatar" style="height: 50px; width: 50px; object-fit:cover;"/>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" asp-route-id="@User.Claims.ElementAt(0).Value">@User.Claims.ElementAt(1).Value</a>
@@ -87,10 +87,10 @@
                     else
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Войти</a>
+                            <a class="nav-link text-dark border-left border-right gb" asp-controller="Account" asp-action="Login">Войти</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Зарегистрироваться</a>
+                            <a class="nav-link text-dark border-left border-right gb" asp-controller="Account" asp-action="Register">Зарегистрироваться</a>
                         </li>
                     }
                 </ul>
