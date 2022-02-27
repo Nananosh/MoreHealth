@@ -11,8 +11,8 @@
 $(function() {
     $("#scheduler").kendoScheduler({
         footer: false,
-        date: new Date("@DateTime.Now.ToString("yyyy-M-d")"),
-        startTime: new Date("@DateTime.Now.ToString("yyyy-M-d 08:00")"),
+        startTime: new Date("@DateTime.Now.ToString("yyyy-M-d 07:00")"),
+        endTime: new Date("@DateTime.Now.ToString("yyyy-M-d 20:00")"),
         allDaySlot: false,
         views: [
             {
