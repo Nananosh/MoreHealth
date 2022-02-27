@@ -53,7 +53,13 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="PaidServices" asp-action="Index">Платные услуги</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AllDoctors">Нади врачи</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AllDoctors">Наши врачи</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">О нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Article">Новости</a>
                     </li>
                     @if (User.Identity.IsAuthenticated)
                     {

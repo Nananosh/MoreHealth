@@ -287,3 +287,4 @@ C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Appointment\PatientAppointment.cshtml.g.cs
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Appointment\AddAppointmentPatientByDoctor.cshtml.g.cs
 C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Home\AllDoctors.cshtml.g.cs
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Home\Article.cshtml.g.cs

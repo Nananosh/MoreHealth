@@ -39,6 +39,11 @@ namespace MoreHealth.Controllers
             return View(doctors);
         }
 
+        public IActionResult Article()
+        {
+            return View();
+        }
+
         public IActionResult DoctorWorkTime(string id)
         {
             if (id == null) return RedirectToAction("Index");

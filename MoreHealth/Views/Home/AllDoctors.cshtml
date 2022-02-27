@@ -8,27 +8,45 @@
         </div>
         <div class="col-lg-12 d-flex justify-content-center align-items-baseline">
             <div class="mr-1 h5">Кабинет:</div>
-            <p class="text-secondary">@doctor.Cabinet.CabinetNumber</p>
+            @if (@doctor.Cabinet != null)
+            {
+                <p class="text-secondary">@doctor.Cabinet.CabinetNumber</p>
+            }
         </div>
         <div class="col-lg-12 d-flex justify-content-center align-items-baseline">
             <div class="mr-1 h5">Департамент:</div>
-            <p class="text-secondary">@doctor.Specialization.Department.DepartmentName</p>
+            @if (@doctor.Specialization !=null)
+            {
+                <p class="text-secondary">@doctor.Specialization.Department.DepartmentName</p>
+            }
         </div>
         <div class="col-lg-12 d-flex justify-content-center align-items-baseline">
-            <div class="mr-1 h5">Кабинет:</div>
-            <p class="text-secondary">@doctor.Specialization.SpecializationName</p>
+            <div class="mr-1 h5">Специальность:</div>
+            @if (doctor.Specialization != null)
+            {
+                <p class="text-secondary">@doctor.Specialization.SpecializationName</p>
+            }
         </div>
         <div class="col-lg-12 d-flex justify-content-center align-items-baseline">
             <div class="mr-1 h5">Время работы в чётные дни:</div>
-            <p class="text-secondary">@doctor.StartWorkTimeEvenDay.ToString("t") - @doctor.EndWorkTimeEvenDay.ToString("t")</p>
+            @if (!string.IsNullOrEmpty(@doctor.StartWorkTimeEvenDay.ToString("t")))
+            {
+                <p class="text-secondary">@doctor.StartWorkTimeEvenDay.ToString("t") - @doctor.EndWorkTimeEvenDay.ToString("t")</p>
+            }
         </div>
         <div class="col-lg-12 d-flex justify-content-center align-items-baseline">
             <div class="mr-1 h5">Время работы в нечётные дни:</div>
-            <p class="text-secondary">@doctor.StartWorkTimeOddDay.ToString("t") - @doctor.EndWorkTimeOddDay.ToString("t")</p>
+            @if (!string.IsNullOrEmpty(@doctor.StartWorkTimeOddDay.ToString("t")))
+            {
+                <p class="text-secondary">@doctor.StartWorkTimeOddDay.ToString("t") - @doctor.EndWorkTimeOddDay.ToString("t")</p>
+            }
         </div>
         <div class="col-lg-12 d-flex justify-content-center align-items-baseline">
-            <div class="mr-1 h5">Время работы в выходные дни:</div>
-            <p class="text-secondary">@doctor.Weekend</p>
+            <div class="mr-1 h5">Выходные дни:</div>
+            @if (!string.IsNullOrEmpty(@doctor.Weekend))
+            {
+                <p class="text-secondary">@doctor.Weekend</p>
+            }
         </div>
     </div>
 }
