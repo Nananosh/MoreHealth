@@ -36,5 +36,8 @@ namespace MoreHealth.Business.Interfaces
         void RemoveSpecialization(Specialization specialization);
         void RemoveDoctor(Doctor doctor);
         void RemoveFeedBack(Feedback feedback);
+        List<AppointmentHome> GetAppointmentsHomeByDateFilter(DateTime d1, DateTime d2);
+        List<AppointmentViewModel> GetAppointmentsByDateFilter(DateTime d1, DateTime d2);
+        
     }
 }

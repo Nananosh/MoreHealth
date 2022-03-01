@@ -214,7 +214,35 @@ namespace MoreHealth.Business.Services
 
             return addedPaidService;
         }
+        
+        public List<AppointmentViewModel> GetAppointmentsByDateFilter(DateTime d1, DateTime d2)
+        {
+            var appointments = db.Appointments
+                .Where(x => x.DateStart >= d1 && x.DateStart <= d2 && x.PatientId != null)
+                .Include(x => x.Patient)
+                .Include(x => x.Doctor)
+                .ThenInclude(x => x.Specialization)
+                .Include(x => x.Doctor)
+                .ThenInclude(x => x.Cabinet)
+                .ToList();
 
+            return mapper.Map<List<AppointmentViewModel>>(appointments);
+        }
+
+        public List<AppointmentHome> GetAppointmentsHomeByDateFilter(DateTime d1, DateTime d2)
+        {
+            var appointments = db.Appointments
+                .Where(x => x.DateStart >= d1 && x.DateStart <= d2)
+                .Include(x => x.Doctor)
+                .Include(x => x.Doctor)
+                .ThenInclude(x => x.Specialization)
+                .Include(x => x.Doctor)
+                .ThenInclude(x => x.Cabinet)
+                .ToList();
+
+            return mapper.Map<List<AppointmentHome>>(appointments);
+        }
+        
         public Department CreateDepartment(Department department)
         {
             if (department != null)

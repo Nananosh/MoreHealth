@@ -62,6 +62,11 @@ namespace MoreHealth.Controllers
             return View();
         }
 
+        public IActionResult Doctor()
+        {
+            return View();
+        }
+
         public JsonResult GetAllCabinets()
         {
             var cabinets = adminService.GetAllCabinets();
@@ -158,8 +163,27 @@ namespace MoreHealth.Controllers
 
             return Json(mapper.Map<CabinetViewModel>(cabinet));
         }
+        
+        public JsonResult GetAppointmentsByDateFilter(string dateStart, string dateEnd)
+        {
+            DateTime dStart = DateTime.Parse(dateStart);
+            DateTime dEnd = DateTime.Parse(dateEnd);
+            
+            var conclusions = adminService.GetAppointmentsByDateFilter(dStart, dEnd);
 
+            return Json(conclusions);
+        }
 
+        public JsonResult GetAppointmentsHomeByDateFilter(string dateStart, string dateEnd)
+        {
+            DateTime dStart = DateTime.Parse(dateStart);
+            DateTime dEnd = DateTime.Parse(dateEnd);
+            
+            var conclusions = adminService.GetAppointmentsHomeByDateFilter(dStart, dEnd);
+
+            return Json(conclusions);
+        }
+        
         [HttpPost]
         public IActionResult CreatePaidService(PaidServiceViewModel model)
         {
