@@ -215,10 +215,10 @@ namespace MoreHealth.Business.Services
             return addedPaidService;
         }
         
-        public List<AppointmentViewModel> GetAppointmentsByDateFilter(DateTime d1, DateTime d2)
+        public List<AppointmentViewModel> GetAppointmentsByDateFilter(DateTime d1, DateTime d2, int doctorId)
         {
             var appointments = db.Appointments
-                .Where(x => x.DateStart >= d1 && x.DateStart <= d2 && x.PatientId != null)
+                .Where(x => x.DateStart >= d1 && x.DateStart <= d2 && x.PatientId != null && x.DoctorId == doctorId)
                 .Include(x => x.Patient)
                 .Include(x => x.Doctor)
                 .ThenInclude(x => x.Specialization)

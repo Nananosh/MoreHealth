@@ -1,26 +1,15 @@
-﻿<nav>
-    <div class="nav nav-tabs mb-5 d-flex justify-content-center" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active"  asp-action="AdminAppointmentHome" aria-controls="nav-profile" aria-selected="false">Вызов на дом</a>
-        <a class="nav-item nav-link"  asp-action="AdminDepartment" aria-controls="nav-contact" aria-selected="false">Отделение</a>
-        <a class="nav-item nav-link"  asp-action="AdminCabinet" aria-controls="nav-contact" aria-selected="false">Кабинет</a>
-        <a class="nav-item nav-link"  asp-action="AdminDoctor" aria-controls="nav-contact" aria-selected="false">Доктор</a>
-        <a class="nav-item nav-link"  asp-action="AdminFeedback" aria-controls="nav-contact" aria-selected="false">Отзывы</a>
-        <a class="nav-item nav-link"  asp-action="AdminPaidService" aria-controls="nav-contact" aria-selected="false">Платные услуги</a>
-        <a class="nav-item nav-link"  asp-action="AdminSpecialization" aria-controls="nav-contact" aria-selected="false">Специальности</a>
-    </div>
-</nav>
-
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
 <div class="content">
     <div class="mt-5">
-        <p>Дата начала: 
+        <p>@ViewBag.DoctorId;</p>
+        <p>Дата начала:
             <input id="startDate" class="mb-3" style="margin:15px;"/>
             Дата окончания:
-           <input id="endDate" class="mb-3" style="margin:15px;"/>
+            <input id="endDate" class="mb-3" style="margin:15px;"/>
         </p>
         <div id="grid"> </div>
     </div>
 </div>
-
 <script>
 $(document).ready(function () {
     onFilterChange();
@@ -52,9 +41,11 @@ $(document).ready(function () {
                                     var dateEnd = $("#endDate").data("kendoDatePicker").value();
                                     var dateStartConverted = kendo.toString(dateStart, "dd/MM/yyyy");
                                     var dateEndConverted = kendo.toString(dateEnd, "dd/MM/yyyy");
+                                    var doctorId = @ViewBag.DoctorId;
                                     return {
                                         dateStart: kendo.toString(dateStartConverted, "dd/MM/yyyy"),
-                                        dateEnd: kendo.toString(dateEndConverted, "dd/MM/yyyy")
+                                        dateEnd: kendo.toString(dateEndConverted, "dd/MM/yyyy"),
+                                        doctorId: doctorId
                                     };
                                 }
                             },
@@ -72,6 +63,9 @@ $(document).ready(function () {
                                                 serverFiltering: true,
                                                 serverSorting: true
                                             },
+                                            toolbar: [
+                                                                {name: "excel"}
+                                                            ],
                                             height: 550,
                                             pageable: true,
                                             columns: [

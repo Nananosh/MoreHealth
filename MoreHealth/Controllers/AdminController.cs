@@ -62,8 +62,9 @@ namespace MoreHealth.Controllers
             return View();
         }
 
-        public IActionResult Doctor()
+        public IActionResult Doctor(int id)
         {
+            ViewBag.DoctorId = id;
             return View();
         }
 
@@ -164,12 +165,11 @@ namespace MoreHealth.Controllers
             return Json(mapper.Map<CabinetViewModel>(cabinet));
         }
         
-        public JsonResult GetAppointmentsByDateFilter(string dateStart, string dateEnd)
+        public JsonResult GetAppointmentsByDateFilter(string dateStart, string dateEnd, int doctorId)
         {
             DateTime dStart = DateTime.Parse(dateStart);
             DateTime dEnd = DateTime.Parse(dateEnd);
-            
-            var conclusions = adminService.GetAppointmentsByDateFilter(dStart, dEnd);
+            var conclusions = adminService.GetAppointmentsByDateFilter(dStart, dEnd, doctorId);
 
             return Json(conclusions);
         }

@@ -123,6 +123,11 @@ $(document).ready(function () {
                         template: "#= kendo.toString(kendo.parseDate(Patient.dateBirth, 'yyyy-MM-dd'), 'MM/dd/yyyy') #"
                     },
                     {
+                                            field: "Date",
+                                            title: "Дата вызова",
+                                            template: "#= kendo.toString(kendo.parseDate(Patient.dateBirth, 'yyyy-MM-dd'), 'MM/dd/yyyy') #"
+                                        },
+                    {
                         command: "destroy"
                     }
                 ]

@@ -148,7 +148,10 @@
                     },
                     {
                         command: { text: "Добавить талоны", click: editTalons }
-                    }
+                    },
+                    {
+                                            command: { text: "Отчёт", click: appointmentDoctor }
+                                        }
                 ]
             });
         });
@@ -156,10 +159,18 @@
         function editTalons(e){
                    e.preventDefault();
                    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-                   var redirectUrl = "@Url.Action("AddAppointmentByDoctor","Appointment")" + `/?id=${dataItem.Id}`
+                   var redirectUrl = "@Url.Action("AddAppointmentByDoctor","Appointment")" + `/?id=${dataItem.id}`
                    console.log(redirectUrl)
                    window.location.replace(redirectUrl);
                 }
+                
+        function appointmentDoctor(e){
+                           e.preventDefault();
+                           var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                           var redirectUrl = "@Url.Action("Doctor","Admin")" + `/?id=${dataItem.Id}`
+                           console.log(redirectUrl)
+                           window.location.replace(redirectUrl);
+                        }
         
         function startWorkTimeEvenDayEditor(container, options) {
             $('<input required name="StartWorkTimeEvenDay">')

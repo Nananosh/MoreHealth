@@ -73,7 +73,6 @@
                                 {
                                     <a class="dropdown-item" asp-controller="Appointment" asp-action="AppointmentByDoctor" asp-route-id="@User.Claims.ElementAt(0).Value">Талоны</a>
                                     <a class="dropdown-item" asp-controller="Appointment" asp-action="AddAppointmentPatientByDoctor">Выдать талон</a>
-                                    <a class="dropdown-item" asp-controller="Admin" asp-action="Doctor">Отчёт по пациентам</a>
                                 }
                                 @if (User.IsInRole("Patient"))
                                 {
