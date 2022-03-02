@@ -39,7 +39,7 @@ namespace MoreHealth.Business.Services
 
         public IQueryable GetDoctorsBySpecialization(ApplicationContext db, int id)
         {
-            var doctors = db.Doctor.Select(x => new {x.Id, x.Name}).Where(x => x.Id == id);
+            var doctors = db.Doctor.Where(x => x.Specialization.Id == id);
             return doctors;
         }
 
