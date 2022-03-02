@@ -231,15 +231,10 @@ namespace MoreHealth.Business.Services
 
         public List<AppointmentHome> GetAppointmentsHomeByDateFilter(DateTime d1, DateTime d2)
         {
-            var appointments = db.Appointments
-                .Where(x => x.DateStart >= d1 && x.DateStart <= d2)
-                .Include(x => x.Doctor)
-                .Include(x => x.Doctor)
-                .ThenInclude(x => x.Specialization)
-                .Include(x => x.Doctor)
-                .ThenInclude(x => x.Cabinet)
+            var appointments = db.AppointmentHomes
+                .Where(x => x.Date.Date >= d1.Date && x.Date.Date <= d2.Date)
+                .Include(x => x.Patient)
                 .ToList();
-
             return mapper.Map<List<AppointmentHome>>(appointments);
         }
         

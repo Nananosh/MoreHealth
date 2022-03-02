@@ -395,3 +395,4 @@ F:\work\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\ref\MoreHealth.dll
 F:\work\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\MoreHealth.pdb
 F:\work\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\MoreHealth.genruntimeconfig.cache
 F:\work\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Admin\Doctor.cshtml.g.cs
+C:\Users\nanan\RiderProjects\MoreHealth\MoreHealth\obj\Debug\net5.0\Razor\Views\Admin\Doctor.cshtml.g.cs

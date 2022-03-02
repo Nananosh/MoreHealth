@@ -60,8 +60,7 @@ namespace MoreHealth.Controllers
                     });
                     await _database.SaveChangesAsync();
                     await _userManager.AddToRoleAsync(user, "Doctor");
-                    await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("AdminDoctor", "Admin");
                 }
 
                 foreach (var error in result.Errors) ModelState.AddModelError(string.Empty, error.Description);

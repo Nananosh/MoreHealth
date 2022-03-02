@@ -1,5 +1,6 @@
 ﻿@model List<MoreHealth.ViewModels.DoctorViewModel>
 
+<div class="container">
 @foreach (var doctor in @Model)
 {
     <div class="row bg-secondary shadow p-3 mb-5 bg-white rounded m-2 d-flex justify-content-center">
@@ -14,7 +15,7 @@
             }
         </div>
         <div class="col-lg-12 d-flex justify-content-center align-items-baseline">
-            <div class="mr-1 h5">Департамент:</div>
+            <div class="mr-1 h5">Отделение:</div>
             @if (@doctor.Specialization !=null)
             {
                 <p class="text-secondary">@doctor.Specialization.Department.DepartmentName</p>
@@ -50,3 +51,4 @@
         </div>
     </div>
 }
+</div>

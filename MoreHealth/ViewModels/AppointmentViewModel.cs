@@ -6,7 +6,7 @@ namespace MoreHealth.ViewModels
     public class AppointmentViewModel
     {
         public int Id { get; set; }
-        public Patient Patient { get; set; }
+        public PatientViewModel Patient { get; set; }
         public int? PatientId { get; set; }
         public Doctor Doctor { get; set; }
         public int DoctorId { get; set; }

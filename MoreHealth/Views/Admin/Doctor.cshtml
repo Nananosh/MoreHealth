@@ -1,7 +1,7 @@
 ﻿<nav>
     <div class="nav nav-tabs mb-5 d-flex justify-content-center" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active"  asp-action="AdminAppointmentHome" aria-controls="nav-profile" aria-selected="false">Вызов на дом</a>
-        <a class="nav-item nav-link"  asp-action="AdminDepartment" aria-controls="nav-contact" aria-selected="false">Департамент</a>
+        <a class="nav-item nav-link"  asp-action="AdminDepartment" aria-controls="nav-contact" aria-selected="false">Отделение</a>
         <a class="nav-item nav-link"  asp-action="AdminCabinet" aria-controls="nav-contact" aria-selected="false">Кабинет</a>
         <a class="nav-item nav-link"  asp-action="AdminDoctor" aria-controls="nav-contact" aria-selected="false">Доктор</a>
         <a class="nav-item nav-link"  asp-action="AdminFeedback" aria-controls="nav-contact" aria-selected="false">Отзывы</a>
@@ -11,7 +11,7 @@
 </nav>
 
 <div class="content">
-    <div class="row mt-5">
+    <div class="mt-5">
         <p>Дата начала: 
             <input id="startDate" class="mb-3" style="margin:15px;"/>
             Дата окончания:
@@ -76,13 +76,13 @@ $(document).ready(function () {
                                             pageable: true,
                                             columns: [
                                                 {
-                                                    field: "Patient.title",
+                                                    field: "Patient.fullName",
                                                     title: "Клиент"
                                                 },
                                                 {
                                                     field: "DateStart",
                                                     title: "День",
-                                                    format: "{0:dd-MM-yyyy}"
+                                                    format: "{0:dd-MM-yyyy HH:MM}"
                                                 }
                                             ]
         });
